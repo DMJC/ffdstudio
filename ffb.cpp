@@ -40,6 +40,7 @@ int test_haptic( SDL_Joystick * joystick, FFDEffect effect_data) {
  hap_type haptic_effect = static_cast<hap_type>(effect_data.get_effect_type());
  cout << "Heffect: " << haptic_effect << " var cont: " << effect_data.get_effect_type() << endl;
  cout << "data length: " <<  effect_data.get_length() << endl;
+ int effect_length = 1000;
  //cout << "Trying Effects" << endl;
  switch (haptic_effect)
  {
@@ -56,6 +57,7 @@ int test_haptic( SDL_Joystick * joystick, FFDEffect effect_data) {
 		cout << "Attack Strength: " << effect_data.get_attack_level() << endl;
 		cout << "Fade Length: " << effect_data.get_fade_length() << endl;
 		cout << "Fade Level: " << effect_data.get_fade_level() << endl;
+	 	effect_length = effect_data.get_length(); // 3 seconds long
 		effect.periodic.type = effect_data.get_type();
  		effect.periodic.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
  		effect.periodic.direction.dir[0] = effect_data.get_direction(); // Force comes from north at 180 degrees
@@ -70,6 +72,7 @@ int test_haptic( SDL_Joystick * joystick, FFDEffect effect_data) {
 //		effect.periodic.fade_level = effect_data.get_fade_level(); // 1000 = Takes 1 second to fade away
 	 break;
  	case ramp: cout << "Ramp"  << endl;
+	 	effect_length = 3000; // 3 seconds long
 		effect.type = SDL_HAPTIC_RAMP;
  		effect.ramp.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
  		effect.ramp.direction.dir[0] = 18000; // Force comes from north at 180 degrees
@@ -79,18 +82,21 @@ int test_haptic( SDL_Joystick * joystick, FFDEffect effect_data) {
 	 break;
  	case leftright:
 		cout << "Left/Right" << endl;
+	 	effect_length = effect_data.get_length(); // 3 seconds long
 	 	effect.leftright.length = effect_data.get_length(); // 3 seconds long
 	 	effect.leftright.large_magnitude = effect_data.get_large_magnitude(); // 3 seconds long
 	 	effect.leftright.small_magnitude = effect_data.get_small_magnitude(); // 3 seconds long
 	 break;
  	case condition:
 		 cout << "Condition" << endl;
+	 	effect_length = 3000; // 3 seconds long
  		effect.condition.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
  		effect.condition.direction.dir[0] = 18000; // Force comes from north at 180 degrees
 	 	effect.condition.length = 3000; // 3 seconds long
 	 break;
  	case custom:
 		 cout << "Custom" << endl;
+	 	effect_length = 3000; // 3 seconds long
  		effect.custom.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
  		effect.custom.direction.dir[0] = 18000; // Force comes from north at 180 degrees
  		effect.custom.period = 1500; // 1500 ms
@@ -99,7 +105,8 @@ int test_haptic( SDL_Joystick * joystick, FFDEffect effect_data) {
 		effect.custom.fade_length = 250; // 1000 = Takes 1 second to fade away
 	 break;
  	case constant: cout << "Constant" << endl; 
- 		effect.constant.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
+	 	effect_length = effect_data.get_length(); // 3 seconds long
+		effect.constant.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
  		effect.constant.direction.dir[0] = 18000; // Force comes from north at 180 
 	 	effect.constant.length = effect_data.get_length(); // 3 seconds long
 	 	effect.constant.delay = effect_data.get_delay(); // delay before starting 1 second
@@ -116,7 +123,7 @@ int test_haptic( SDL_Joystick * joystick, FFDEffect effect_data) {
 
  // Test the effect
  SDL_HapticRunEffect( haptic, effect_id, 1 );
- SDL_Delay(1000); // Wait for the effect to finish
+ SDL_Delay(effect_length); // Wait for the effect to finish
 
  // We destroy the effect, although closing the device also does this
  SDL_HapticDestroyEffect( haptic, effect_id );

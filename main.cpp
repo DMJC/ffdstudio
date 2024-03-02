@@ -1,4 +1,5 @@
 #include "ffd.h"
+
 FFDWindow::FFDWindow() {
     	name_label.set_label("Profile Name: ");
     	effect_type_label.set_label("Effect Type: ");
@@ -368,6 +369,8 @@ FFDWindow::FFDWindow() {
 	launch_grid.add(create_new_button);
 	launch_grid.add(open_profile_button);
 	launch_grid.add(quit_button);
+	//disable save button on launch
+	save_profile_button.set_sensitive(false);
 	// Add button click event handlers
 	create_new_button.signal_clicked().connect(sigc::mem_fun(*this, &FFDWindow::on_create_button_clicked));
 	open_profile_button.signal_clicked().connect(sigc::mem_fun(*this, &FFDWindow::on_open_profile_button_clicked));
@@ -385,6 +388,7 @@ FFDWindow::FFDWindow() {
 	add(launch_grid);
         show_all_children();
 }
+
 
 void FFDWindow::on_create_button_clicked() {
         // Remove the first grid
@@ -409,17 +413,47 @@ void FFDWindow::on_create_button_clicked() {
 		pane.pack2(effect_create_grid,true,false);
         show_all_children();
 }
+
+void FFDWindow::open_from_file(const std::string& filename) {
+
+}
+
 void FFDWindow::on_open_profile_button_clicked() {
-		cout << "open profile" << endl;
+	cout << "open profile" << endl;
+        Gtk::FileChooserDialog open_dialog("Please choose a file", Gtk::FILE_CHOOSER_ACTION_OPEN);
+        int result = open_dialog.run();
+        if (result == Gtk::RESPONSE_OK) {
+                std::string filename = open_dialog.get_filename();
+                open_from_file(filename);
+        }
 }
 
 void FFDWindow::on_quit_button_clicked() {
 		this->close();
 }
 
+void FFDWindow::save_to_file(const std::string& filename, const std::string& content) {
+    std::ofstream file(filename);
+    if (file.is_open()) {
+        file << content;
+        file.close();
+        std::cout << "File saved successfully." << std::endl;
+    } else {
+        std::cerr << "Unable to open file for writing." << std::endl;
+    }
+}
+
 void FFDWindow::on_save_profile_button_clicked() {
 	cout << "Save Profile" << endl;
+	Gtk::FileChooserDialog save_dialog("Please choose a file", Gtk::FILE_CHOOSER_ACTION_SAVE);
+        int result = save_dialog.run();
+        if (result == Gtk::RESPONSE_OK) {
+                std::string filename = save_dialog.get_filename();
+                std::string content = "Hello, World!\nThis is a test file.\n";
+                save_to_file(filename, content);
+        }
 }
+
 
 void FFDWindow::clean_effect_grid (){
 	if (this->chosen == 1){
@@ -428,6 +462,7 @@ void FFDWindow::clean_effect_grid (){
         	    effect_create_grid.remove(*child);
         	}
 	}
+	save_profile_button.set_sensitive(true);
 	this->chosen = 0;
 }
 

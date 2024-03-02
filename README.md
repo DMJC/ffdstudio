@@ -1,5 +1,5 @@
 # Force Feedback Design Studio
-A tool for creating/editing Force Feedback Effects.
+A tool for creating/editing Force Feedback Effects written in C++/GTKMM-3.0
 
 Notes:
 - Compatible with Wayland
@@ -12,7 +12,7 @@ Testing:
 - Should work on any Joystick or Wheel device as long as libSDL2 supports it.
 
 Dependencies:
-Ensure you have libSDL2 installed along with gtkmm-3.0
+- Ensure you have libSDL2 installed along with gtkmm-3.0
 
 Compiling:
-Run Make
+- Run Make

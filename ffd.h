@@ -2,11 +2,29 @@
 #define FFD
 #include <gtkmm.h>
 #include <iostream>
+#include <fstream>
 #include "ffb.h"
 #include "effect.h"
 using namespace std;
 
 class FFDWindow : public Gtk::Window {
+public:
+    FFDWindow();
+    FFDWindow(const std::string& title, Gtk::FileChooserAction action);
+    void save_to_file(const std::string& filename, const std::string& content);
+    void open_from_file(const std::string& filename);
+    void on_create_button_clicked();
+    void on_open_profile_button_clicked();
+    void on_quit_button_clicked();
+    void on_save_profile_button_clicked();
+    void clean_effect_grid ();
+    void on_periodic_button_clicked();
+    void on_ramp_button_clicked();
+    void on_leftright_button_clicked();
+    void on_condition_button_clicked();
+    void on_constant_button_clicked();
+    void on_custom_button_clicked();
+    void on_test_effect_button_clicked();
 private:
     Gtk::Grid launch_grid, effect_select_grid, effect_create_grid; // Define your grids
     Gtk::Button create_new_button, open_profile_button, quit_button;
@@ -23,20 +41,6 @@ private:
     Gtk::ComboBoxText effect_type, direction_type, condition_type;
     FFDEffect effect;
     int chosen = 0;
-public:
-    FFDWindow();
-    void on_create_button_clicked();
-    void on_open_profile_button_clicked();
-    void on_quit_button_clicked();
-    void on_save_profile_button_clicked();
-    void clean_effect_grid ();
-    void on_periodic_button_clicked();
-    void on_ramp_button_clicked();
-    void on_leftright_button_clicked();
-    void on_condition_button_clicked();
-    void on_constant_button_clicked();
-    void on_custom_button_clicked();
-    void on_test_effect_button_clicked();
 };
 
 #endif //FFD

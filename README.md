@@ -12,7 +12,7 @@ Testing:
 - Should work on any Joystick or Wheel device as long as libSDL2 supports it.
 
 Dependencies:
-- Ensure you have libSDL2 installed along with gtkmm-3.0
+- Ensure you have libSDL2 installed along with gtkmm-4.0
 
 Compiling:
 - Run Make

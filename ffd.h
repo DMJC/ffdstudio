@@ -3,6 +3,8 @@
 #include <gtkmm.h>
 #include <iostream>
 #include <fstream>
+#include <thread>
+#include <future>
 #include "ffb.h"
 #include "effect.h"
 using namespace std;
@@ -10,7 +12,11 @@ using namespace std;
 class FFDWindow : public Gtk::Window {
 public:
     FFDWindow();
-    FFDWindow(const std::string& title, Gtk::FileChooserAction action);
+    thread sdlThread;
+    future<int> sdl_started;
+    void align_all();
+    void joinThread();
+    void start_sdl();
     void save_to_file(const std::string& filename, const std::string& content);
     void open_from_file(const std::string& filename);
     void on_create_button_clicked();
@@ -41,6 +47,7 @@ private:
     Gtk::ComboBoxText effect_type, direction_type, condition_type;
     FFDEffect effect;
     int chosen = 0;
+    int has_sdl_started = 0;
 };
 
 #endif //FFD

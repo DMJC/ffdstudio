@@ -150,8 +150,11 @@ void open_joysticks(FFDEffect effect_data){
 	        cout << "Number of Axes: " << SDL_JoystickNumAxes(joy) << endl;
 	        cout << "Number of Buttons: " <<  SDL_JoystickNumButtons(joy) << endl;
 	        cout << "Number of Balls: " <<  SDL_JoystickNumBalls(joy) << endl;
-			test_haptic(joy, effect_data);
-	    } else {
+		int result = test_haptic(joy, effect_data);
+		if (result == -1){
+			cout << "error, not a Force Feedback Device" << endl;
+		}
+	    	} else {
 	        cout << "Couldn't open Joystick 0" << endl;
 	    }
 
@@ -168,7 +171,7 @@ void open_joys(FFDEffect effect_data){
 
 void init_sdl(void){
         	cout << "Starting SDL\n this will take a while" << SDL_GetError( ) << endl;
-	if (SDL_Init( SDL_INIT_EVERYTHING ) < 0 )
+	if (SDL_Init( SDL_INIT_HAPTIC|SDL_INIT_GAMECONTROLLER||SDL_INIT_JOYSTICK ) < 0 )
 	{
         	cout << " error starting SDL " <<SDL_GetError( ) << endl;
 	} else {

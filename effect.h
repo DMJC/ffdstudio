@@ -1,7 +1,11 @@
 #ifndef EFFECT
 #define EFFECT
+#include <string>
+using namespace std;
+
 class FFDEffect {
 private:
+string effect_name;
 short unsigned int effect_type;
 short unsigned int type;
 short unsigned int length;
@@ -31,6 +35,7 @@ short unsigned int fade_level;
 //short unsigned int8 channels
 
 public:
+	void set_effect_name(string effect_name){this->effect_name = effect_name;}
 	void set_effect_type(short unsigned int effect_type){this->effect_type = effect_type;}
 	void set_type(short unsigned int type){this->type = type;}
 	void set_length(short unsigned int length){this->length = length;}
@@ -57,6 +62,7 @@ public:
 	void set_fade_length(short unsigned int fade_length){this->fade_length = fade_length;}
 	void set_fade_level(short unsigned int fade_level){this->fade_level = fade_level;}
 
+	string get_effect_name(void){ return effect_name; }
 	short unsigned int get_effect_type(void){ return effect_type;}
 	short unsigned int get_type(void){ return type;}
 	short unsigned int get_length(void){ return length;}

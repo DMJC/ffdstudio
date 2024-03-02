@@ -5,6 +5,7 @@
 #include <fstream>
 #include <thread>
 #include <future>
+#include <string>
 #include "ffb.h"
 #include "effect.h"
 using namespace std;
@@ -17,8 +18,9 @@ public:
     void align_all();
     void joinThread();
     void start_sdl();
-    void save_to_file(const std::string& filename, const std::string& content);
-    void open_from_file(const std::string& filename);
+    void on_file_save_response(int response_id, Gtk::FileChooserDialog* dialog);
+    void on_file_open_response(int response_id, Gtk::FileChooserDialog* dialog);
+    void update_variables();
     void on_create_button_clicked();
     void on_open_profile_button_clicked();
     void on_quit_button_clicked();

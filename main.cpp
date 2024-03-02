@@ -445,25 +445,78 @@ void FFDWindow::on_create_button_clicked()
 //	show_all_children();
 }
 
-void FFDWindow::open_from_file(const std::string& filename) 
+void FFDWindow::update_variables()
 {
+	this->effect.set_effect_name(string(name_entry.get_text()));
+	this->effect.set_length(int(length.get_value()));
+	this->effect.set_delay(int(delay.get_value()));
+	//this->effect.set_button();
+	//this->effect.set_interval();
+	this->effect.set_right_sat(int(right_sat.get_value()));
+	this->effect.set_left_sat(int(left_sat.get_value()));
+	this->effect.set_right_coeff(int(right_coeff.get_value()));
+	this->effect.set_left_coeff(int(left_coeff.get_value()));
+	this->effect.set_deadband(int(deadband.get_value()));
+	this->effect.set_center(int(center.get_value()));
+	this->effect.set_direction_type(int(direction_type.get_active_row_number()));
+	this->effect.set_direction(int(direction.get_value()));
+	this->effect.set_period(int(period.get_value()));
+	//this->effect.set_samples();
+	this->effect.set_magnitude(int(magnitude.get_value()));
+	this->effect.set_large_magnitude(int(large_magnitude.get_value()));
+	this->effect.set_small_magnitude(int(small_magnitude.get_value()));
+	this->effect.set_offset(int(offset.get_value()));
+	this->effect.set_phase(int(phase.get_value()));
+	this->effect.set_attack_length(int(attack.get_value()));
+	this->effect.set_attack_level(int(attack_lvl.get_value()));
+	this->effect.set_fade_length(int(fade_length.get_value()));
+	this->effect.set_fade_level(int(fade_lvl.get_value()));
+}
 
+void FFDWindow::on_file_open_response(int response_id, Gtk::FileChooserDialog* dialog) 
+{
+     //Handle the response:
+  switch (response_id)
+  {
+    case Gtk::ResponseType::OK:
+    {
+      cout << "Open clicked." << endl;
+      //Notice that this is a string, not a Glib::ustring.
+
+      break;
+    }
+    case Gtk::ResponseType::CANCEL:
+    {
+      cout << "Cancel clicked." << endl;
+      break;
+    }
+    default:
+    {
+      cout << "Unexpected button clicked." << endl;
+      break;
+    }
+  }
+  delete dialog;
 }
 
 void FFDWindow::on_open_profile_button_clicked() 
 {
-/*	cout << "open profile" << endl;
-		Gtk::FileChooserNative open_dialog("Please choose a file", Gtk::FileChooser::Action::OPEN);
-	open_dialog.set_select_multiple(false);
+    auto open_dialog = new Gtk::FileChooserDialog("Please choose a file", Gtk::FileChooser::Action::OPEN);
+    open_dialog->set_transient_for(*this);
+	open_dialog->set_select_multiple(false);
+	open_dialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
+	open_dialog->add_button("_Open", Gtk::ResponseType::OK);
 	auto filter_ffp = Gtk::FileFilter::create();
 	filter_ffp->set_name("FFP Files");
 	filter_ffp->add_pattern("*.ffp");
-		open_dialog.add_filter(filter_ffp);
-	open_dialog.show();
+	open_dialog->add_filter(filter_ffp);
+    open_dialog->signal_response().connect(sigc::bind(sigc::mem_fun(*this, &FFDWindow::on_file_open_response), open_dialog));
+	open_dialog->show();
+
 /*		int result = open_dialog.run();
 		if (result == Gtk::ResponseType::OK) 
 {
-				std::string filename = open_dialog.get_file();
+				string filename = open_dialog.get_file();
 				open_from_file(filename);
 		}*/
 }
@@ -473,37 +526,76 @@ void FFDWindow::on_quit_button_clicked()
 	this->close();
 }
 
-void FFDWindow::save_to_file(const std::string& filename, const std::string& content) 
+void FFDWindow::on_file_save_response(int response_id, Gtk::FileChooserDialog* dialog)
 {
-	std::ofstream file(filename);
-	if (file.is_open()) 
-	{
-		file << content;
-		file.close();
-		std::cout << "File saved successfully." << std::endl;
-	} else 
-	{
-		std::cerr << "Unable to open file for writing." << std::endl;
-	}
+     //Handle the response:
+  switch (response_id)
+  {
+    case Gtk::ResponseType::OK:
+    {
+      cout << "Save clicked." << endl;
+      //Notice that this is a string, not a Glib::ustring.
+      auto filename = dialog->get_file()->get_path();
+      cout << "File selected: " <<  filename << endl;
+		ofstream outfile(filename);
+		if (!outfile.is_open()) {
+        	std::cerr << "Error opening file for writing!" << std::endl;
+    	}
+		update_variables();
+		outfile << this->effect.get_effect_name() << endl;
+		outfile << this->effect.get_length() << endl;
+		outfile << this->effect.get_delay() << endl;
+		//outfile << this->effect.get_button();
+		//outfile << this->effect.get_interval();
+		outfile << this->effect.get_right_sat() << endl;
+		outfile << this->effect.get_left_sat() << endl;
+		outfile << this->effect.get_right_coeff() << endl;
+		outfile << this->effect.get_left_coeff() << endl;
+		outfile << this->effect.get_deadband() << endl;
+		outfile << this->effect.get_center() << endl;
+		outfile << this->effect.get_direction_type() << endl;
+		outfile << this->effect.get_direction() << endl;
+		outfile << this->effect.get_period() << endl;
+		//outfile << this->effect.get_samples();
+		outfile << this->effect.get_magnitude() << endl;
+		outfile << this->effect.get_large_magnitude() << endl;
+		outfile << this->effect.get_small_magnitude() << endl;
+		outfile << this->effect.get_offset() << endl;
+		outfile << this->effect.get_phase() << endl;
+		outfile << this->effect.get_attack_length() << endl;
+		outfile << this->effect.get_attack_level() << endl;
+		outfile << this->effect.get_fade_length() << endl;
+		outfile << this->effect.get_fade_level() << endl;
+		outfile.close();
+      break;
+    }
+    case Gtk::ResponseType::CANCEL:
+    {
+      cout << "Cancel clicked." << endl;
+      break;
+    }
+    default:
+    {
+      cout << "Unexpected button clicked." << endl;
+      break;
+    }
+  }
+  delete dialog;
 }
 
 void FFDWindow::on_save_profile_button_clicked() 
 {
-/*	cout << "Save Profile" << endl;
-	Gtk::FileChooserDialog save_dialog("Please choose a file", Gtk::FileChooser::Action::SAVE);
-	save_dialog.set_select_multiple(false);
+    auto save_dialog = new Gtk::FileChooserDialog("Please choose a file", Gtk::FileChooser::Action::SAVE);
+    save_dialog->set_transient_for(*this);
+	save_dialog->set_select_multiple(false);
+	save_dialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
+	save_dialog->add_button("Save", Gtk::ResponseType::OK);
 	auto filter_ffp = Gtk::FileFilter::create();
 	filter_ffp->set_name("FFP Files");
 	filter_ffp->add_pattern("*.ffp");
-		save_dialog.add_filter(filter_ffp);
-	open_dialog.show();*/
-/*		int result = save_dialog.run();
-		if (result == Gtk::ResponseType::OK) 
-{
-				std::string filename = save_dialog.get_file();
-				std::string content = "Hello, World!\nThis is a test file.\n";
-				save_to_file(filename, content);
-		}*/
+	save_dialog->add_filter(filter_ffp);
+    save_dialog->signal_response().connect(sigc::bind(sigc::mem_fun(*this, &FFDWindow::on_file_save_response), save_dialog));
+	save_dialog->show();
 }
 
 
@@ -514,6 +606,7 @@ void FFDWindow::clean_effect_grid()
 	effect_create_grid.remove_column(1);
 	effect_create_grid.remove_column(0);
 	save_profile_button.set_sensitive(true);
+    	set_default_size(1000, 400);
 	this->chosen = 0;
 }
 
@@ -666,7 +759,7 @@ void FFDWindow::on_constant_button_clicked()
 	effect_create_grid.attach(fade,1,9,1,1);
 	effect_create_grid.attach(fade_lvl_label,0,10,1,1);
 	effect_create_grid.attach(fade_lvl,1,10,1,1);
-	effect_create_grid.attach(test_effect_button,0,11,3,1);
+	effect_create_grid.attach(test_effect_button,0,11,2,1);
 		align_all();
 	this->chosen == 1;
 }
@@ -686,7 +779,7 @@ void FFDWindow::on_custom_button_clicked()
 	effect_create_grid.attach(attack,1,4,1,1);
 	effect_create_grid.attach(attack_lvl_label,0,5,1,1);
 	effect_create_grid.attach(attack_lvl,1,5,1,1);
-	effect_create_grid.attach(test_effect_button,0,6,3,1);
+	effect_create_grid.attach(test_effect_button,0,6,2,1);
 		align_all();
 	this->chosen == 1;
 }
@@ -745,29 +838,7 @@ void FFDWindow::on_test_effect_button_clicked()
 			this->effect.set_type(SDL_HAPTIC_FRICTION);
 		break;
 	}
-	this->effect.set_length(int(length.get_value()));
-	this->effect.set_delay(int(delay.get_value()));
-	//this->effect.set_button();
-	//this->effect.set_interval();
-	this->effect.set_right_sat(int(right_sat.get_value()));
-	this->effect.set_left_sat(int(left_sat.get_value()));
-	this->effect.set_right_coeff(int(right_coeff.get_value()));
-	this->effect.set_left_coeff(int(left_coeff.get_value()));
-	this->effect.set_deadband(int(deadband.get_value()));
-	this->effect.set_center(int(center.get_value()));
-	this->effect.set_direction_type(int(direction_type.get_active_row_number()));
-	this->effect.set_direction(int(direction.get_value()));
-	this->effect.set_period(int(period.get_value()));
-	//this->effect.set_samples();
-	this->effect.set_magnitude(int(magnitude.get_value()));
-	this->effect.set_large_magnitude(int(large_magnitude.get_value()));
-	this->effect.set_small_magnitude(int(small_magnitude.get_value()));
-	this->effect.set_offset(int(offset.get_value()));
-	this->effect.set_phase(int(phase.get_value()));
-	this->effect.set_attack_length(int(attack.get_value()));
-	this->effect.set_attack_level(int(attack_lvl.get_value()));
-	this->effect.set_fade_length(int(fade_length.get_value()));
-	this->effect.set_fade_level(int(fade_lvl.get_value()));
+	update_variables();
 	cout << "Running Effect" << endl;
 	/*Execute the Force Feedback Engine!*/
 	open_joys(this->effect);

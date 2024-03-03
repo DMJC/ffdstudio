@@ -68,41 +68,41 @@ jobs:
           mkdir -p rpm/ffdstudio/usr/bin
           cp ffdstudio rpm/ffdstudio/usr/bin/
           cat << EOF > rpm/ffdstudio.spec
-Name: ffdstudio
-Version: $(steps.get_version.outputs.VERSION)
-Release: 1%{?dist}
-Summary: Description of your package
+          Name: ffdstudio
+          Version: $(steps.get_version.outputs.VERSION)
+          Release: 1%{?dist}
+          Summary: Description of your package
 
-Group: Applications/Multimedia
-License: GPL
-URL: http://example.com
-Source0: %{name}-%{version}.tar.gz
+          Group: Applications/Multimedia
+          License: GPL
+          URL: http://example.com
+          Source0: %{name}-%{version}.tar.gz
 
-BuildArch: x86_64
+          BuildArch: x86_64
 
-%description
-Description of your package
+          %description
+          Description of your package
 
-%prep
-%autosetup
+          %prep
+          %autosetup
 
-%build
-# Add build commands here
+          %build
+          # Add build commands here
 
-%install
-rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/bin
-cp -r * $RPM_BUILD_ROOT/usr/bin/
+          %install
+          rm -rf $RPM_BUILD_ROOT
+          install -d $RPM_BUILD_ROOT/usr/bin
+          cp -r * $RPM_BUILD_ROOT/usr/bin/
 
-%files
-%defattr(-,root,root,-)
-/usr/bin/*
+          %files
+          %defattr(-,root,root,-)
+          /usr/bin/*
 
-%changelog
-* Your Name <you@example.com> - 1-1
-- Initial package
+          %changelog
+          * Your Name <you@example.com> - 1-1
+          - Initial package
 
-EOF
+          EOF
           tar czf rpm/ffdstudio-%{{steps.get_version.outputs.VERSION}}.tar.gz -C rpm ffdstudio
           rpmbuild -bb --define "_topdir $(pwd)/rpm" --define "_builddir $(pwd)/rpm/BUILD" --define "_rpmdir $(pwd)/rpm/RPMS" --define "_sourcedir $(pwd)/rpm" --define "_specdir $(pwd)/rpm" --define "_srcrpmdir $(pwd)/rpm/SRPMS" rpm/ffdstudio.spec
           mv rpm/RPMS/x86_64/*.rpm ffdstudio.rpm

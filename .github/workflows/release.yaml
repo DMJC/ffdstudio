@@ -104,7 +104,7 @@ jobs:
           EOF
           tar czf rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}.tar.gz -C rpm "ffdstudio-${{steps.get_version.outputs.VERSION}}"
           rpmbuild -bb --define "_topdir $(pwd)/rpm" --define "_builddir $RPM_BUILD_ROOT" --define "_rpmdir $(pwd)/rpm/RPMS" --define "_sourcedir $(pwd)/rpm" --define "_specdir $(pwd)/rpm" --define "_srcrpmdir $(pwd)/rpm/SRPMS" rpm/ffdstudio.spec
-          mv ffdstudio/rpm/RPMS/x86_64/ffdstudio-${{steps.get_version.outputs.VERSION}}-1.x86_64.rpm ./ffdstudio-${{steps.get_version.outputs.VERSION}}-1.x86_64.rpm
+          mv ./rpm/RPMS/x86_64/ffdstudio-${{steps.get_version.outputs.VERSION}}-1.x86_64.rpm ./ffdstudio-${{steps.get_version.outputs.VERSION}}-1.x86_64.rpm
           
       - name: Create release
         id: create_release

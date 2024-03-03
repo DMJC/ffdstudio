@@ -69,7 +69,7 @@ jobs:
           cp ffdstudio rpm/ffdstudio/usr/bin/
           cat << EOF > rpm/ffdstudio.spec
           Name: ffdstudio
-          Version: $(steps.get_version.outputs.VERSION)
+          Version: ${{steps.get_version.outputs.VERSION}}
           Release: 1%{?dist}
           Summary: Description of your package
 

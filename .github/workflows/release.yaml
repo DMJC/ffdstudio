@@ -104,7 +104,6 @@ jobs:
           EOF
           tar czf rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}.tar.gz -C rpm "ffdstudio-${{steps.get_version.outputs.VERSION}}"
           rpmbuild -bb --define "_topdir $(pwd)/rpm" --define "_builddir $RPM_BUILD_ROOT" --define "_rpmdir $(pwd)/rpm/RPMS" --define "_sourcedir $(pwd)/rpm" --define "_specdir $(pwd)/rpm" --define "_srcrpmdir $(pwd)/rpm/SRPMS" rpm/ffdstudio.spec
-          mv -v rpm/RPMS/x86_64/*.rpm ffdstudio.rpm
           
       - name: Create release
         id: create_release
@@ -145,6 +144,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ffdstudio.rpm
-          asset_name: ffdstudio.rpm
+          asset_path: ./ffdstudio-${{ steps.get_version.outputs.VERSION }}-1.x86_64.rpm
+          asset_name: ffdstudio-${{ steps.get_version.outputs.VERSION }}-1.x86_64.rpm
           asset_content_type: application/octet-stream

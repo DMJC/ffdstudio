@@ -65,8 +65,8 @@ jobs:
           
       - name: Package RPM (rpm)
         run: |
-          mkdir -p rpm/ffdstudio/usr/bin
-          cp ffdstudio rpm/ffdstudio/usr/bin/
+          mkdir -p rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}/usr/bin
+          cp ffdstudio rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}/usr/bin/
           export RPM_BUILD_ROOT="$(pwd)/rpm/BUILD"
           cat << EOF > rpm/ffdstudio.spec
           Name: ffdstudio

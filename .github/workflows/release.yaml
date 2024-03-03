@@ -91,9 +91,8 @@ jobs:
           # Add build commands here
 
           %install
-          rm -rf $RPM_BUILD_ROOT
-          install -d $RPM_BUILD_ROOT/usr/bin
-          cp -r usr/bin/ffdstudio $RPM_BUILD_ROOT/usr/bin/
+          mkdir -p %{buildroot}/usr/bin
+          cp -r usr/bin/ffdstudio %{buildroot}/usr/bin/
 
           %files
           %defattr(-,root,root,-)

@@ -67,6 +67,7 @@ jobs:
         run: |
           mkdir -p rpm/ffdstudio/usr/bin
           cp ffdstudio rpm/ffdstudio/usr/bin/
+          export RPM_BUILD_ROOT="$(pwd)/rpm/BUILD"
           cat << EOF > rpm/ffdstudio.spec
           Name: ffdstudio
           Version: ${{steps.get_version.outputs.VERSION}}
@@ -99,13 +100,12 @@ jobs:
           /usr/bin/*
 
           %changelog
-          * Your Name <you@example.com> - 1-1
           - Initial package
 
           EOF
           tar czf rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}.tar.gz -C rpm ffdstudio
-          rpmbuild -bb --define "_topdir $(pwd)/rpm" --define "_builddir $(pwd)/rpm/BUILD" --define "_rpmdir $(pwd)/rpm/RPMS" --define "_sourcedir $(pwd)/rpm" --define "_specdir $(pwd)/rpm" --define "_srcrpmdir $(pwd)/rpm/SRPMS" rpm/ffdstudio.spec
-          mv rpm/RPMS/x86_64/*.rpm ffdstudio.rpm
+          rpmbuild -bb --define "_topdir $(pwd)/rpm" --define "_builddir $RPM_BUILD_ROOT" --define "_rpmdir $(pwd)/rpm/RPMS" --define "_sourcedir $(pwd)/rpm" --define "_specdir $(pwd)/rpm" --define "_srcrpmdir $(pwd)/rpm/SRPMS" rpm/ffdstudio.spec
+          mv -v rpm/RPMS/x86_64/*.rpm ffdstudio.rpm
           
       - name: Create release
         id: create_release

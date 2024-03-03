@@ -97,7 +97,7 @@ jobs:
 
           %files
           %defattr(-,root,root,-)
-          /usr/bin/*
+          /usr/bin/ffdstudio
 
           %changelog
           - Initial package

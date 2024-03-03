@@ -50,17 +50,30 @@ FFDWindow::FFDWindow()
 	condition_type.set_active(0);
 
 	// Create a scale widget
-	direction.set_range(0, 27000);
-	direction.set_digits(0); // Set number of digits after the decimal point
-	direction.set_draw_value(FALSE); // Display the value on the scale
+	direction_0.set_range(0, 27000);
+	direction_0.set_digits(0); // Set number of digits after the decimal point
+	direction_0.set_draw_value(FALSE); // Display the value on the scale
 	// Add marks to the scale
-	direction.add_mark(0, Gtk::PositionType::TOP, "0");
-	direction.add_mark(9000, Gtk::PositionType::TOP, "90");
-	direction.add_mark(18000, Gtk::PositionType::TOP, "180");
-	direction.add_mark(27000, Gtk::PositionType::TOP, "270");
-	direction.set_value(18000);
-	direction.set_hexpand();
-	direction.set_vexpand();
+	direction_0.add_mark(0, Gtk::PositionType::TOP, "0");
+	direction_0.add_mark(9000, Gtk::PositionType::TOP, "90");
+	direction_0.add_mark(18000, Gtk::PositionType::TOP, "180");
+	direction_0.add_mark(27000, Gtk::PositionType::TOP, "270");
+	direction_0.set_value(18000);
+	direction_0.set_hexpand();
+	direction_0.set_vexpand();
+
+	// Create a scale widget
+	direction_1.set_range(0, 27000);
+	direction_1.set_digits(0); // Set number of digits after the decimal point
+	direction_1.set_draw_value(FALSE); // Display the value on the scale
+	// Add marks to the scale
+	direction_1.add_mark(0, Gtk::PositionType::TOP, "0");
+	direction_1.add_mark(9000, Gtk::PositionType::TOP, "90");
+	direction_1.add_mark(18000, Gtk::PositionType::TOP, "180");
+	direction_1.add_mark(27000, Gtk::PositionType::TOP, "270");
+	direction_1.set_value(9000);
+	direction_1.set_hexpand();
+	direction_1.set_vexpand();
 
 	left_coeff.set_range(-32767, 32767);
 	left_coeff.set_digits(0); // Set number of digits after the decimal point
@@ -459,7 +472,8 @@ void FFDWindow::update_variables()
 	this->effect.set_deadband(int(deadband.get_value()));
 	this->effect.set_center(int(center.get_value()));
 	this->effect.set_direction_type(int(direction_type.get_active_row_number()));
-	this->effect.set_direction(int(direction.get_value()));
+	this->effect.set_direction_0(int(direction_0.get_value()));
+	this->effect.set_direction_1(int(direction_1.get_value()));
 	this->effect.set_period(int(period.get_value()));
 	//this->effect.set_samples();
 	this->effect.set_magnitude(int(magnitude.get_value()));
@@ -554,7 +568,8 @@ void FFDWindow::on_file_save_response(int response_id, Gtk::FileChooserDialog* d
 		outfile << this->effect.get_deadband() << endl;
 		outfile << this->effect.get_center() << endl;
 		outfile << this->effect.get_direction_type() << endl;
-		outfile << this->effect.get_direction() << endl;
+		outfile << this->effect.get_direction_0() << endl;
+		outfile << this->effect.get_direction_1() << endl;
 		outfile << this->effect.get_period() << endl;
 		//outfile << this->effect.get_samples();
 		outfile << this->effect.get_magnitude() << endl;
@@ -636,7 +651,7 @@ void FFDWindow::on_periodic_button_clicked()
 	effect_create_grid.attach(dir_type_label,0,3,1,1);
 	effect_create_grid.attach(direction_type,1,3,1,1);
 	effect_create_grid.attach(dir_label,0,4,1,1);
-	effect_create_grid.attach(direction,1,4,4,1);
+	effect_create_grid.attach(direction_0,1,4,4,1);
 	effect_create_grid.attach(period_label,0,5,1,1);
 	effect_create_grid.attach(period,1,5,4,1);
 	effect_create_grid.attach(magnitude_label,0,7,1,1);
@@ -664,7 +679,7 @@ void FFDWindow::on_ramp_button_clicked()
 	effect_create_grid.attach(dir_type_label,0,2,1,1);
 	effect_create_grid.attach(direction_type,1,2,1,1);
 	effect_create_grid.attach(dir_label,0,3,1,1);
-	effect_create_grid.attach(direction,1,3,4,1);
+	effect_create_grid.attach(direction_0,1,3,4,1);
 	effect_create_grid.attach(length_label,0,4,1,1);
 	effect_create_grid.attach(length,1,4,1,1);
 	effect_create_grid.attach(delay_label,0,5,1,1);
@@ -740,7 +755,7 @@ void FFDWindow::on_constant_button_clicked()
 	effect_create_grid.attach(name_entry,1,0,1,1);
 	effect_create_grid.attach(effect_header_label,0,1,2,1);
 	effect_create_grid.attach(dir_label,0,2,1,1);
-	effect_create_grid.attach(direction,1,2,4,1);
+	effect_create_grid.attach(direction_0,1,2,4,1);
 	effect_create_grid.attach(length_label,0,3,1,1);
 	effect_create_grid.attach(length,1,3,1,1);
 	effect_create_grid.attach(delay_label,0,4,1,1);
@@ -801,6 +816,18 @@ void FFDWindow::on_test_effect_button_clicked()
 		if (name == "Custom"){ type_var = 5; }
 	cout << "type_var = " << type_var << endl;
 	this->effect.set_type(type_var);
+        switch (direction_type.get_active_row_number())
+        {
+                case 0:
+                        this->effect.set_direction_type(SDL_HAPTIC_POLAR);
+                break;
+                case 1:
+                        this->effect.set_direction_type(SDL_HAPTIC_CARTESIAN);
+                break;
+                case 2:
+                        this->effect.set_direction_type(SDL_HAPTIC_SPHERICAL);
+                break;
+	}
 	switch (effect_type.get_active_row_number())
 	{
 		case 0:

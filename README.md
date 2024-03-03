@@ -4,7 +4,6 @@ A tool for creating/editing Force Feedback Effects written in C++/GTKMM-3.0
 Notes:
 - Compatible with Wayland
 - Currently Periodic effects work the best, smaller values are more effective. The default when creating a periodic effect works.
-- Startup is a little slow due to SDL loading.
 
 Testing:
 - Tested on Micosoft Sidewinder Force Feedback 2.

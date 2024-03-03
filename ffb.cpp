@@ -55,8 +55,16 @@ cout << "Converted value: " << sdlValue << endl;
  	case periodic:
 	 	effect_length = effect_data.get_length(); // 3 seconds long
 		effect.periodic.type = effect_data.get_effect_type();
- 		effect.periodic.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
- 		effect.periodic.direction.dir[0] = effect_data.get_direction(); // Force comes from north at 180 degrees
+ 		effect.periodic.direction.type = effect_data.get_direction_type(); // Polar coordinates
+		switch (effect_data.get_direction_type()){
+			case 1:
+				cout << "call 1: " << effect_data.get_direction_1() << endl;
+ 				effect.periodic.direction.dir[1] = effect_data.get_direction_1(); // Force comes from north at 180 degrees
+			default:
+				cout << "call 2: " << effect_data.get_direction_0() << endl;
+		 		effect.periodic.direction.dir[0] = effect_data.get_direction_0(); // Force comes from north at 180 degrees
+			break;
+		}
 	 	effect.periodic.length = effect_data.get_length(); // 3 seconds long
 	 	effect.periodic.delay = effect_data.get_delay(); // 3 seconds long
  		effect.periodic.period = effect_data.get_period(); // 1500 ms
@@ -70,8 +78,16 @@ cout << "Converted value: " << sdlValue << endl;
  	case ramp: cout << "Type: Ramp" << endl;
 	 	effect_length = effect_data.get_length(); // 3 seconds long
 		effect.ramp.type = SDL_HAPTIC_RAMP;
- 		effect.ramp.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
- 		effect.ramp.direction.dir[0] = effect_data.get_direction(); // Force comes from north at 180 degrees
+		effect.ramp.direction.type = effect_data.get_direction_type(); // Polar coordinates
+		switch (effect_data.get_direction_type()){
+			case 1:
+				cout << "call 1: " << effect_data.get_direction_1() << endl;
+ 				effect.ramp.direction.dir[1] = effect_data.get_direction_1(); // Force comes from north at 180 degrees
+			default:
+				cout << "call 2: " << effect_data.get_direction_0() << endl;
+		 		effect.ramp.direction.dir[0] = effect_data.get_direction_0(); // Force comes from north at 180 degrees
+			break;
+		}
 	 	effect.ramp.length = effect_data.get_length(); // 3 seconds long
  		effect.ramp.attack_length = effect_data.get_attack_length(); // 1000 = Takes 1 second to get max strength
 		effect.ramp.fade_length = effect_data.get_fade_length(); // 1000 = Takes 1 second to fade away
@@ -86,13 +102,21 @@ cout << "Converted value: " << sdlValue << endl;
 	 break;
  	case condition:
 		 cout << "Condition" << endl;
-/*	 	effect_length = effect_data.get_length(); // 3 seconds long
+	 	effect_length = effect_data.get_length(); // 3 seconds long
  		effect.condition.type = effect_data.get_condition_type(); // Polar coordinates
- 		effect.condition.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
- 		effect.condition.direction.dir[0] = effect_data.get_direction(); // Force comes from north at 180 degrees
+		effect.condition.direction.type = effect_data.get_direction_type(); // Polar coordinates
+		switch (effect_data.get_direction_type()){
+			case 1:
+				cout << "call 1: " << effect_data.get_direction_1() << endl;
+ 				effect.condition.direction.dir[1] = effect_data.get_direction_1(); // Force comes from north at 180 degrees
+			default:
+				cout << "call 2: " << effect_data.get_direction_0() << endl;
+		 		effect.condition.direction.dir[0] = effect_data.get_direction_0(); // Force comes from north at 180 degrees
+			break;
+		}
 	 	effect.condition.length = effect_data.get_length(); // 3 seconds long
 		effect.condition.delay = effect_data.get_delay();
-		effect.condition.right_sat = effect_data.get_right_sat();
+/*		effect.condition.right_sat = effect_data.get_right_sat();
 		effect.condition.left_sat = effect_data.get_left_sat();
 		effect.condition.right_coeff = effect_data.get_right_coeff();
 		effect.condition.left_coeff = effect_data.get_left_coeff();
@@ -101,10 +125,18 @@ cout << "Converted value: " << sdlValue << endl;
 	 break;
  	case custom:
 		 cout << "Custom" << endl;
-	 	effect_length = 3000; // 3 seconds long
+	 	effect_length = effect_data.get_length(); // 3 seconds long
  		effect.custom.type = SDL_HAPTIC_CUSTOM;
- 		effect.custom.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
- 		effect.custom.direction.dir[0] = effect_data.get_direction(); // Force comes from north at 180 degrees
+		effect.custom.direction.type = effect_data.get_direction_type(); // Polar coordinates
+		switch (effect_data.get_direction_type()){
+			case 1:
+				cout << "call 1: " << effect_data.get_direction_1() << endl;
+ 				effect.custom.direction.dir[1] = effect_data.get_direction_1(); // Force comes from north at 180 degrees
+			default:
+				cout << "call 2: " << effect_data.get_direction_0() << endl;
+		 		effect.custom.direction.dir[0] = effect_data.get_direction_0(); // Force comes from north at 180 degrees
+			break;
+		}
  		effect.custom.period = effect_data.get_period(); // 1500 ms
 	 	effect.custom.length = effect_data.get_length(); // 3 seconds long
  		effect.custom.attack_length = effect_data.get_attack_length(); // 1000 = Takes 1 second to get max strength
@@ -113,8 +145,16 @@ cout << "Converted value: " << sdlValue << endl;
  	case constant: cout << "Constant" << endl; 
 	 	effect_length = effect_data.get_length(); // 3 seconds long
 		effect.constant.type = SDL_HAPTIC_CONSTANT;
-		effect.constant.direction.type = SDL_HAPTIC_POLAR; // Polar coordinates
- 		effect.constant.direction.dir[0] = effect_data.get_direction(); // Force comes from north at 180 
+		effect.constant.direction.type = effect_data.get_direction_type(); // Polar coordinates
+		switch (effect_data.get_direction_type()){
+			case 1:
+				cout << "call 1: " << effect_data.get_direction_1() << endl;
+ 				effect.constant.direction.dir[1] = effect_data.get_direction_1(); // Force comes from north at 180 degrees
+			default:
+				cout << "call 2: " << effect_data.get_direction_0() << endl;
+		 		effect.constant.direction.dir[0] = effect_data.get_direction_0(); // Force comes from north at 180 degrees
+			break;
+		}
 	 	effect.constant.length = effect_data.get_length(); // 3 seconds long
 	 	effect.constant.delay = effect_data.get_delay(); // delay before starting 1 second
  		effect.constant.attack_length = effect_data.get_attack_length(); // 1000 = Takes 1 second to get max strength

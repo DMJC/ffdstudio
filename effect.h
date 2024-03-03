@@ -19,7 +19,8 @@ short signed int right_coeff;
 short signed int left_coeff;
 short unsigned int deadband;
 short signed int center;
-short unsigned int direction;
+short unsigned int direction_0;
+short unsigned int direction_1;
 short unsigned int direction_type;
 short unsigned int period;
 short unsigned int samples;
@@ -50,7 +51,8 @@ public:
 	void set_left_coeff(short signed int left_coeff){this->left_coeff = left_coeff;}
 	void set_deadband(short unsigned int deadband){this->deadband = deadband;}
 	void set_center(short signed int center){this->center = center;}
-	void set_direction(short unsigned int direction){this->direction = direction;}
+	void set_direction_0(short unsigned int direction_0){this->direction_0 = direction_0;}
+	void set_direction_1(short unsigned int direction_1){this->direction_1 = direction_1;}
 	void set_direction_type(short unsigned int direction_type){this->direction_type = direction_type;}
 	void set_period(short unsigned int period){this->period = period;}
 	void set_samples(short unsigned int samples){this->samples = samples;}
@@ -79,7 +81,8 @@ public:
 	short unsigned int get_deadband(void){return deadband;}
 	short signed int get_center(void){return center;}
 	short unsigned int get_direction_type(void){ return direction_type;}
-	short unsigned int get_direction(void){return direction;}
+	short unsigned int get_direction_0(void){return direction_0;}
+	short unsigned int get_direction_1(void){return direction_1;}
 	short unsigned int get_period(void){return period;}
 	short unsigned int get_samples(void){return samples;}
 	short signed int get_magnitude(void){return magnitude;}

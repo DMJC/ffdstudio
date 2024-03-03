@@ -43,7 +43,7 @@ private:
     Gtk::Label left_coeff_label, deadband_label, center_label, start_strength_label, end_strength_label;
     Gtk::Paned pane;
     Gtk::Button test_effect_button;
-    Gtk::Scale direction, delay, period, phase, offset, magnitude, large_magnitude, small_magnitude, length, fade, fade_lvl, fade_length, attack, attack_lvl;
+    Gtk::Scale direction_0, direction_1, direction_2, delay, period, phase, offset, magnitude, large_magnitude, small_magnitude, length, fade, fade_lvl, fade_length, attack, attack_lvl;
     Gtk::Scale level, left_sat, right_sat, right_coeff, left_coeff, deadband, center, start_strength, end_strength;
     Gtk::Entry name_entry;
     Gtk::ComboBoxText effect_type, direction_type, condition_type;

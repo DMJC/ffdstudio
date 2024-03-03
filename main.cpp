@@ -22,9 +22,9 @@ FFDWindow::FFDWindow()
 	fade_label.set_label("Fade Length (seconds to fade off): ");
 	fade_lvl_label.set_label("Fade Level (level at end of fade): ");
 	left_sat_label.set_label("Left Level: ");
+	left_coeff_label.set_label("Left Coefficient: ");
 	right_sat_label.set_label("Right Level: ");
 	right_coeff_label.set_label("Right Coefficient: ");
-	left_coeff_label.set_label("Left Coefficient: ");
 	deadband_label.set_label("Deadzone Size: ");
 	center_label.set_label("Center of Deadzone: ");
 	effect_header_label.set_margin_top(8);
@@ -75,74 +75,254 @@ FFDWindow::FFDWindow()
 	direction_1.set_hexpand();
 	direction_1.set_vexpand();
 
-	left_coeff.set_range(-32767, 32767);
-	left_coeff.set_digits(0); // Set number of digits after the decimal point
-	left_coeff.set_draw_value(TRUE); // Display the value on the scale
-	left_coeff.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
-	left_coeff.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
-	left_coeff.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
-	left_coeff.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
-	left_coeff.add_mark(0, Gtk::PositionType::TOP, "0%");
-	left_coeff.add_mark(9000, Gtk::PositionType::TOP, "25%");
-	left_coeff.add_mark(18000, Gtk::PositionType::TOP, "50%");
-	left_coeff.add_mark(27000, Gtk::PositionType::TOP, "75%");
-	left_coeff.add_mark(32767, Gtk::PositionType::TOP, "100%");
-	left_coeff.set_hexpand();
-	left_coeff.set_vexpand();
+	left_coeff_0.set_range(-32767, 32767);
+	left_coeff_0.set_digits(0); // Set number of digits after the decimal point
+	left_coeff_0.set_draw_value(TRUE); // Display the value on the scale
+	left_coeff_0.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
+	left_coeff_0.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
+	left_coeff_0.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
+	left_coeff_0.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
+	left_coeff_0.add_mark(0, Gtk::PositionType::TOP, "0%");
+	left_coeff_0.add_mark(9000, Gtk::PositionType::TOP, "25%");
+	left_coeff_0.add_mark(18000, Gtk::PositionType::TOP, "50%");
+	left_coeff_0.add_mark(27000, Gtk::PositionType::TOP, "75%");
+	left_coeff_0.add_mark(32767, Gtk::PositionType::TOP, "100%");
+	left_coeff_0.set_hexpand();
+	left_coeff_0.set_vexpand();
 
-	right_coeff.set_range(-32767, 32767);
-	right_coeff.set_digits(0); // Set number of digits after the decimal point
-	right_coeff.set_draw_value(TRUE); // Display the value on the scale
-	right_coeff.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
-	right_coeff.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
-	right_coeff.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
-	right_coeff.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
-	right_coeff.add_mark(0, Gtk::PositionType::TOP, "0%");
-	right_coeff.add_mark(9000, Gtk::PositionType::TOP, "25%");
-	right_coeff.add_mark(18000, Gtk::PositionType::TOP, "50%");
-   	right_coeff.add_mark(27000, Gtk::PositionType::TOP, "75%");
-   	right_coeff.add_mark(32767, Gtk::PositionType::TOP, "100%");
-	right_coeff.set_hexpand();
-	right_coeff.set_vexpand();
+	left_coeff_1.set_range(-32767, 32767);
+	left_coeff_1.set_digits(0); // Set number of digits after the decimal point
+	left_coeff_1.set_draw_value(TRUE); // Display the value on the scale
+	left_coeff_1.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
+	left_coeff_1.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
+	left_coeff_1.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
+	left_coeff_1.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
+	left_coeff_1.add_mark(0, Gtk::PositionType::TOP, "0%");
+	left_coeff_1.add_mark(9000, Gtk::PositionType::TOP, "25%");
+	left_coeff_1.add_mark(18000, Gtk::PositionType::TOP, "50%");
+	left_coeff_1.add_mark(27000, Gtk::PositionType::TOP, "75%");
+	left_coeff_1.add_mark(32767, Gtk::PositionType::TOP, "100%");
+	left_coeff_1.set_hexpand();
+	left_coeff_1.set_vexpand();
 
-	left_sat.set_range(0, 65535);
-	left_sat.set_digits(0); // Set number of digits after the decimal point
-	left_sat.set_draw_value(TRUE); // Display the value on the scale
-	left_sat.add_mark(0, Gtk::PositionType::TOP, "0%");
-	left_sat.add_mark(16384, Gtk::PositionType::TOP, "25%");
-	left_sat.add_mark(32768, Gtk::PositionType::TOP, "50%");
-	left_sat.add_mark(49172, Gtk::PositionType::TOP, "75%");
-	left_sat.add_mark(65535, Gtk::PositionType::TOP, "100%");
-	left_sat.set_value(32768);
-	left_sat.set_hexpand();
-	left_sat.set_vexpand();
+	left_coeff_2.set_range(-32767, 32767);
+	left_coeff_2.set_digits(0); // Set number of digits after the decimal point
+	left_coeff_2.set_draw_value(TRUE); // Display the value on the scale
+	left_coeff_2.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
+	left_coeff_2.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
+	left_coeff_2.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
+	left_coeff_2.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
+	left_coeff_2.add_mark(0, Gtk::PositionType::TOP, "0%");
+	left_coeff_2.add_mark(9000, Gtk::PositionType::TOP, "25%");
+	left_coeff_2.add_mark(18000, Gtk::PositionType::TOP, "50%");
+	left_coeff_2.add_mark(27000, Gtk::PositionType::TOP, "75%");
+	left_coeff_2.add_mark(32767, Gtk::PositionType::TOP, "100%");
+	left_coeff_2.set_hexpand();
+	left_coeff_2.set_vexpand();
 
-	right_sat.set_range(0, 65535);
-	right_sat.set_digits(0); // Set number of digits after the decimal point
-	right_sat.set_draw_value(TRUE); // Display the value on the scale
-	right_sat.add_mark(0, Gtk::PositionType::TOP, "0%");
-	right_sat.add_mark(16384, Gtk::PositionType::TOP, "25%");
-	right_sat.add_mark(32768, Gtk::PositionType::TOP, "50%");
-	right_sat.add_mark(49172, Gtk::PositionType::TOP, "75%");
-	right_sat.add_mark(65535, Gtk::PositionType::TOP, "100%");
-	right_sat.set_value(32768);
-	right_sat.set_hexpand();
-	right_sat.set_vexpand();
+	right_coeff_0.set_range(-32767, 32767);
+	right_coeff_0.set_digits(0); // Set number of digits after the decimal point
+	right_coeff_0.set_draw_value(TRUE); // Display the value on the scale
+	right_coeff_0.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
+	right_coeff_0.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
+	right_coeff_0.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
+	right_coeff_0.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
+	right_coeff_0.add_mark(0, Gtk::PositionType::TOP, "0%");
+	right_coeff_0.add_mark(9000, Gtk::PositionType::TOP, "25%");
+	right_coeff_0.add_mark(18000, Gtk::PositionType::TOP, "50%");
+   	right_coeff_0.add_mark(27000, Gtk::PositionType::TOP, "75%");
+   	right_coeff_0.add_mark(32767, Gtk::PositionType::TOP, "100%");
+	right_coeff_0.set_hexpand();
+	right_coeff_0.set_vexpand();
 
-	center.set_range(-32767, 32767);
-	center.set_digits(0); // Set number of digits after the decimal point
-	center.set_draw_value(TRUE); // Display the value on the scale
-	center.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
-	center.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
-	center.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
-	center.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
-	center.add_mark(0, Gtk::PositionType::TOP, "0%");
-	center.add_mark(9000, Gtk::PositionType::TOP, "25%");
-	center.add_mark(18000, Gtk::PositionType::TOP, "50%");
-	center.add_mark(27000, Gtk::PositionType::TOP, "75%");
-	center.add_mark(32767, Gtk::PositionType::TOP, "100%");
-	center.set_hexpand();
-	center.set_vexpand();
+	right_coeff_1.set_range(-32767, 32767);
+	right_coeff_1.set_digits(0); // Set number of digits after the decimal point
+	right_coeff_1.set_draw_value(TRUE); // Display the value on the scale
+	right_coeff_1.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
+	right_coeff_1.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
+	right_coeff_1.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
+	right_coeff_1.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
+	right_coeff_1.add_mark(0, Gtk::PositionType::TOP, "0%");
+	right_coeff_1.add_mark(9000, Gtk::PositionType::TOP, "25%");
+	right_coeff_1.add_mark(18000, Gtk::PositionType::TOP, "50%");
+   	right_coeff_1.add_mark(27000, Gtk::PositionType::TOP, "75%");
+   	right_coeff_1.add_mark(32767, Gtk::PositionType::TOP, "100%");
+	right_coeff_1.set_hexpand();
+	right_coeff_1.set_vexpand();
+
+	right_coeff_2.set_range(-32767, 32767);
+	right_coeff_2.set_digits(0); // Set number of digits after the decimal point
+	right_coeff_2.set_draw_value(TRUE); // Display the value on the scale
+	right_coeff_2.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
+	right_coeff_2.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
+	right_coeff_2.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
+	right_coeff_2.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
+	right_coeff_2.add_mark(0, Gtk::PositionType::TOP, "0%");
+	right_coeff_2.add_mark(9000, Gtk::PositionType::TOP, "25%");
+	right_coeff_2.add_mark(18000, Gtk::PositionType::TOP, "50%");
+   	right_coeff_2.add_mark(27000, Gtk::PositionType::TOP, "75%");
+   	right_coeff_2.add_mark(32767, Gtk::PositionType::TOP, "100%");
+	right_coeff_2.set_hexpand();
+	right_coeff_2.set_vexpand();
+
+	left_sat_0.set_range(0, 65535);
+	left_sat_0.set_digits(0); // Set number of digits after the decimal point
+	left_sat_0.set_draw_value(TRUE); // Display the value on the scale
+	left_sat_0.add_mark(0, Gtk::PositionType::TOP, "0%");
+	left_sat_0.add_mark(16384, Gtk::PositionType::TOP, "25%");
+	left_sat_0.add_mark(32768, Gtk::PositionType::TOP, "50%");
+	left_sat_0.add_mark(49172, Gtk::PositionType::TOP, "75%");
+	left_sat_0.add_mark(65535, Gtk::PositionType::TOP, "100%");
+	left_sat_0.set_value(32768);
+	left_sat_0.set_hexpand();
+	left_sat_0.set_vexpand();
+
+	left_sat_1.set_range(0, 65535);
+	left_sat_1.set_digits(0); // Set number of digits after the decimal point
+	left_sat_1.set_draw_value(TRUE); // Display the value on the scale
+	left_sat_1.add_mark(0, Gtk::PositionType::TOP, "0%");
+	left_sat_1.add_mark(16384, Gtk::PositionType::TOP, "25%");
+	left_sat_1.add_mark(32768, Gtk::PositionType::TOP, "50%");
+	left_sat_1.add_mark(49172, Gtk::PositionType::TOP, "75%");
+	left_sat_1.add_mark(65535, Gtk::PositionType::TOP, "100%");
+	left_sat_1.set_value(32768);
+	left_sat_1.set_hexpand();
+	left_sat_1.set_vexpand();
+
+	left_sat_2.set_range(0, 65535);
+	left_sat_2.set_digits(0); // Set number of digits after the decimal point
+	left_sat_2.set_draw_value(TRUE); // Display the value on the scale
+	left_sat_2.add_mark(0, Gtk::PositionType::TOP, "0%");
+	left_sat_2.add_mark(16384, Gtk::PositionType::TOP, "25%");
+	left_sat_2.add_mark(32768, Gtk::PositionType::TOP, "50%");
+	left_sat_2.add_mark(49172, Gtk::PositionType::TOP, "75%");
+	left_sat_2.add_mark(65535, Gtk::PositionType::TOP, "100%");
+	left_sat_2.set_value(32768);
+	left_sat_2.set_hexpand();
+	left_sat_2.set_vexpand();
+
+	right_sat_0.set_range(0, 65535);
+	right_sat_0.set_digits(0); // Set number of digits after the decimal point
+	right_sat_0.set_draw_value(TRUE); // Display the value on the scale
+	right_sat_0.add_mark(0, Gtk::PositionType::TOP, "0%");
+	right_sat_0.add_mark(16384, Gtk::PositionType::TOP, "25%");
+	right_sat_0.add_mark(32768, Gtk::PositionType::TOP, "50%");
+	right_sat_0.add_mark(49172, Gtk::PositionType::TOP, "75%");
+	right_sat_0.add_mark(65535, Gtk::PositionType::TOP, "100%");
+	right_sat_0.set_value(32768);
+	right_sat_0.set_hexpand();
+	right_sat_0.set_vexpand();
+
+	right_sat_1.set_range(0, 65535);
+	right_sat_1.set_digits(0); // Set number of digits after the decimal point
+	right_sat_1.set_draw_value(TRUE); // Display the value on the scale
+	right_sat_1.add_mark(0, Gtk::PositionType::TOP, "0%");
+	right_sat_1.add_mark(16384, Gtk::PositionType::TOP, "25%");
+	right_sat_1.add_mark(32768, Gtk::PositionType::TOP, "50%");
+	right_sat_1.add_mark(49172, Gtk::PositionType::TOP, "75%");
+	right_sat_1.add_mark(65535, Gtk::PositionType::TOP, "100%");
+	right_sat_1.set_value(32768);
+	right_sat_1.set_hexpand();
+	right_sat_1.set_vexpand();
+
+	right_sat_2.set_range(0, 65535);
+	right_sat_2.set_digits(0); // Set number of digits after the decimal point
+	right_sat_2.set_draw_value(TRUE); // Display the value on the scale
+	right_sat_2.add_mark(0, Gtk::PositionType::TOP, "0%");
+	right_sat_2.add_mark(16384, Gtk::PositionType::TOP, "25%");
+	right_sat_2.add_mark(32768, Gtk::PositionType::TOP, "50%");
+	right_sat_2.add_mark(49172, Gtk::PositionType::TOP, "75%");
+	right_sat_2.add_mark(65535, Gtk::PositionType::TOP, "100%");
+	right_sat_2.set_value(32768);
+	right_sat_2.set_hexpand();
+	right_sat_2.set_vexpand();
+
+	center_0.set_range(-32767, 32767);
+	center_0.set_digits(0); // Set number of digits after the decimal point
+	center_0.set_draw_value(TRUE); // Display the value on the scale
+	center_0.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
+	center_0.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
+	center_0.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
+	center_0.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
+	center_0.add_mark(0, Gtk::PositionType::TOP, "0%");
+	center_0.add_mark(9000, Gtk::PositionType::TOP, "25%");
+	center_0.add_mark(18000, Gtk::PositionType::TOP, "50%");
+	center_0.add_mark(27000, Gtk::PositionType::TOP, "75%");
+	center_0.add_mark(32767, Gtk::PositionType::TOP, "100%");
+	center_0.set_hexpand();
+	center_0.set_vexpand();
+
+	center_1.set_range(-32767, 32767);
+	center_1.set_digits(0); // Set number of digits after the decimal point
+	center_1.set_draw_value(TRUE); // Display the value on the scale
+	center_1.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
+	center_1.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
+	center_1.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
+	center_1.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
+	center_1.add_mark(0, Gtk::PositionType::TOP, "0%");
+	center_1.add_mark(9000, Gtk::PositionType::TOP, "25%");
+	center_1.add_mark(18000, Gtk::PositionType::TOP, "50%");
+	center_1.add_mark(27000, Gtk::PositionType::TOP, "75%");
+	center_1.add_mark(32767, Gtk::PositionType::TOP, "100%");
+	center_1.set_hexpand();
+	center_1.set_vexpand();
+
+	center_2.set_range(-32767, 32767);
+	center_2.set_digits(0); // Set number of digits after the decimal point
+	center_2.set_draw_value(TRUE); // Display the value on the scale
+	center_2.add_mark(-32768, Gtk::PositionType::TOP, "-100%");
+	center_2.add_mark(-27000, Gtk::PositionType::TOP, "-75%");
+	center_2.add_mark(-18000, Gtk::PositionType::TOP, "-50%");
+	center_2.add_mark(-9000, Gtk::PositionType::TOP, "-25%");
+	center_2.add_mark(0, Gtk::PositionType::TOP, "0%");
+	center_2.add_mark(9000, Gtk::PositionType::TOP, "25%");
+	center_2.add_mark(18000, Gtk::PositionType::TOP, "50%");
+	center_2.add_mark(27000, Gtk::PositionType::TOP, "75%");
+	center_2.add_mark(32767, Gtk::PositionType::TOP, "100%");
+	center_2.set_hexpand();
+	center_2.set_vexpand();
+
+	deadband_0.set_range(0, 65535);
+	deadband_0.add_mark(0, Gtk::PositionType::TOP, "0");
+	deadband_0.add_mark(1000, Gtk::PositionType::TOP, "1");
+	deadband_0.add_mark(5000, Gtk::PositionType::TOP, "5");
+	deadband_0.add_mark(10000, Gtk::PositionType::TOP, "10");
+	deadband_0.add_mark(20000, Gtk::PositionType::TOP, "20");
+	deadband_0.add_mark(30000, Gtk::PositionType::TOP, "30");
+	deadband_0.add_mark(40000, Gtk::PositionType::TOP, "40");
+	deadband_0.add_mark(50000, Gtk::PositionType::TOP, "50");
+	deadband_0.add_mark(60000, Gtk::PositionType::TOP, "60");
+	deadband_0.add_mark(65535, Gtk::PositionType::TOP, "Max");
+	deadband_0.set_hexpand();
+	deadband_0.set_vexpand();
+
+	deadband_1.set_range(0, 65535);
+	deadband_1.add_mark(0, Gtk::PositionType::TOP, "0");
+	deadband_1.add_mark(1000, Gtk::PositionType::TOP, "1");
+	deadband_1.add_mark(5000, Gtk::PositionType::TOP, "5");
+	deadband_1.add_mark(10000, Gtk::PositionType::TOP, "10");
+	deadband_1.add_mark(20000, Gtk::PositionType::TOP, "20");
+	deadband_1.add_mark(30000, Gtk::PositionType::TOP, "30");
+	deadband_1.add_mark(40000, Gtk::PositionType::TOP, "40");
+	deadband_1.add_mark(50000, Gtk::PositionType::TOP, "50");
+	deadband_1.add_mark(60000, Gtk::PositionType::TOP, "60");
+	deadband_1.add_mark(65535, Gtk::PositionType::TOP, "Max");
+	deadband_1.set_hexpand();
+	deadband_1.set_vexpand();
+
+	deadband_2.set_range(0, 65535);
+	deadband_2.add_mark(0, Gtk::PositionType::TOP, "0");
+	deadband_2.add_mark(1000, Gtk::PositionType::TOP, "1");
+	deadband_2.add_mark(5000, Gtk::PositionType::TOP, "5");
+	deadband_2.add_mark(10000, Gtk::PositionType::TOP, "10");
+	deadband_2.add_mark(20000, Gtk::PositionType::TOP, "20");
+	deadband_2.add_mark(30000, Gtk::PositionType::TOP, "30");
+	deadband_2.add_mark(40000, Gtk::PositionType::TOP, "40");
+	deadband_2.add_mark(50000, Gtk::PositionType::TOP, "50");
+	deadband_2.add_mark(60000, Gtk::PositionType::TOP, "60");
+	deadband_2.add_mark(65535, Gtk::PositionType::TOP, "Max");
+	deadband_2.set_hexpand();
+	deadband_2.set_vexpand();
 
 	delay.set_range(0, 65535);
 	delay.set_digits(0); // Set number of digits after the decimal point
@@ -358,20 +538,6 @@ FFDWindow::FFDWindow()
 	fade_lvl.set_hexpand();
 	fade_lvl.set_vexpand();
 
-	deadband.set_range(0, 65535);
-	deadband.add_mark(0, Gtk::PositionType::TOP, "0");
-	deadband.add_mark(1000, Gtk::PositionType::TOP, "1");
-	deadband.add_mark(5000, Gtk::PositionType::TOP, "5");
-	deadband.add_mark(10000, Gtk::PositionType::TOP, "10");
-	deadband.add_mark(20000, Gtk::PositionType::TOP, "20");
-	deadband.add_mark(30000, Gtk::PositionType::TOP, "30");
-	deadband.add_mark(40000, Gtk::PositionType::TOP, "40");
-	deadband.add_mark(50000, Gtk::PositionType::TOP, "50");
-	deadband.add_mark(60000, Gtk::PositionType::TOP, "60");
-	deadband.add_mark(65535, Gtk::PositionType::TOP, "Max");
-	deadband.set_hexpand();
-	deadband.set_vexpand();
-
 	save_profile_button.set_label("Save Profile");
 	set_effect_label.set_label("Pick an effect to Create:");
 	periodic_button.set_label("Periodic");
@@ -465,12 +631,24 @@ void FFDWindow::update_variables()
 	this->effect.set_delay(int(delay.get_value()));
 	//this->effect.set_button();
 	//this->effect.set_interval();
-	this->effect.set_right_sat(int(right_sat.get_value()));
-	this->effect.set_left_sat(int(left_sat.get_value()));
-	this->effect.set_right_coeff(int(right_coeff.get_value()));
-	this->effect.set_left_coeff(int(left_coeff.get_value()));
-	this->effect.set_deadband(int(deadband.get_value()));
-	this->effect.set_center(int(center.get_value()));
+	this->effect.set_right_sat_0(int(right_sat_0.get_value()));
+	this->effect.set_right_sat_1(int(right_sat_1.get_value()));
+	this->effect.set_right_sat_2(int(right_sat_2.get_value()));
+	this->effect.set_left_sat_0(int(left_sat_0.get_value()));
+	this->effect.set_left_sat_1(int(left_sat_1.get_value()));
+	this->effect.set_left_sat_2(int(left_sat_2.get_value()));
+	this->effect.set_right_coeff_0(int(right_coeff_0.get_value()));
+	this->effect.set_right_coeff_1(int(right_coeff_1.get_value()));
+	this->effect.set_right_coeff_2(int(right_coeff_2.get_value()));
+	this->effect.set_left_coeff_0(int(left_coeff_0.get_value()));
+	this->effect.set_left_coeff_1(int(left_coeff_1.get_value()));
+	this->effect.set_left_coeff_2(int(left_coeff_2.get_value()));
+	this->effect.set_deadband_0(int(deadband_0.get_value()));
+	this->effect.set_deadband_1(int(deadband_1.get_value()));
+	this->effect.set_deadband_2(int(deadband_2.get_value()));
+	this->effect.set_center_0(int(center_0.get_value()));
+	this->effect.set_center_1(int(center_1.get_value()));
+	this->effect.set_center_2(int(center_2.get_value()));
 	this->effect.set_direction_type(int(direction_type.get_active_row_number()));
 	this->effect.set_direction_0(int(direction_0.get_value()));
 	this->effect.set_direction_1(int(direction_1.get_value()));
@@ -561,12 +739,24 @@ void FFDWindow::on_file_save_response(int response_id, Gtk::FileChooserDialog* d
 		outfile << this->effect.get_delay() << endl;
 		//outfile << this->effect.get_button();
 		//outfile << this->effect.get_interval();
-		outfile << this->effect.get_right_sat() << endl;
-		outfile << this->effect.get_left_sat() << endl;
-		outfile << this->effect.get_right_coeff() << endl;
-		outfile << this->effect.get_left_coeff() << endl;
-		outfile << this->effect.get_deadband() << endl;
-		outfile << this->effect.get_center() << endl;
+		outfile << this->effect.get_right_sat_0() << endl;
+		outfile << this->effect.get_right_sat_1() << endl;
+		outfile << this->effect.get_right_sat_2() << endl;
+		outfile << this->effect.get_left_sat_0() << endl;
+		outfile << this->effect.get_left_sat_1() << endl;
+		outfile << this->effect.get_left_sat_2() << endl;
+		outfile << this->effect.get_right_coeff_0() << endl;
+		outfile << this->effect.get_right_coeff_1() << endl;
+		outfile << this->effect.get_right_coeff_2() << endl;
+		outfile << this->effect.get_left_coeff_0() << endl;
+		outfile << this->effect.get_left_coeff_1() << endl;
+		outfile << this->effect.get_left_coeff_2() << endl;
+		outfile << this->effect.get_deadband_0() << endl;
+		outfile << this->effect.get_deadband_1() << endl;
+		outfile << this->effect.get_deadband_2() << endl;
+		outfile << this->effect.get_center_0() << endl;
+		outfile << this->effect.get_center_1() << endl;
+		outfile << this->effect.get_center_2() << endl;
 		outfile << this->effect.get_direction_type() << endl;
 		outfile << this->effect.get_direction_0() << endl;
 		outfile << this->effect.get_direction_1() << endl;
@@ -731,17 +921,17 @@ void FFDWindow::on_condition_button_clicked()
 	effect_create_grid.attach(delay_label,0,4,1,1);
 	effect_create_grid.attach(delay,1,4,1,1);
 	effect_create_grid.attach(right_sat_label,0,5,1,1);
-	effect_create_grid.attach(right_sat,1,5,1,1);
+	effect_create_grid.attach(right_sat_0,1,5,1,1);
 	effect_create_grid.attach(left_sat_label,0,6,1,1);
-	effect_create_grid.attach(left_sat,1,6,1,1);
+	effect_create_grid.attach(left_sat_0,1,6,1,1);
 	effect_create_grid.attach(right_coeff_label,0,7,1,1);
-	effect_create_grid.attach(right_coeff,1,7,1,1);
+	effect_create_grid.attach(right_coeff_0,1,7,1,1);
 	effect_create_grid.attach(left_coeff_label,0,8,1,1);
-	effect_create_grid.attach(left_coeff,1,8,1,1);
+	effect_create_grid.attach(left_coeff_0,1,8,1,1);
 	effect_create_grid.attach(deadband_label,0,9,1,1);
-	effect_create_grid.attach(deadband,1,9,1,1);
+	effect_create_grid.attach(deadband_0,1,9,1,1);
 	effect_create_grid.attach(center_label,0,10,1,1);
-	effect_create_grid.attach(center,1,10,1,1);
+	effect_create_grid.attach(center_0,1,10,1,1);
 	effect_create_grid.attach(test_effect_button,0,11,3,1);
 		align_all();
 	this->chosen == 1;

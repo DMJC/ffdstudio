@@ -116,12 +116,29 @@ cout << "Converted value: " << sdlValue << endl;
 		}
 	 	effect.condition.length = effect_data.get_length(); // 3 seconds long
 		effect.condition.delay = effect_data.get_delay();
-/*		effect.condition.right_sat = effect_data.get_right_sat();
-		effect.condition.left_sat = effect_data.get_left_sat();
-		effect.condition.right_coeff = effect_data.get_right_coeff();
-		effect.condition.left_coeff = effect_data.get_left_coeff();
-		effect.condition.deadband = effect_data.get_deadband();
-		effect.condition.center = effect_data.get_center();*/
+/*		switch(axes_enabled){
+			case 2:
+				effect.condition.right_sat[2] = effect_data.get_right_sat_2();
+				effect.condition.left_sat[2] = effect_data.get_left_sat_2();
+				effect.condition.right_coeff[2] = effect_data.get_right_coeff_2();
+				effect.condition.left_coeff[2] = effect_data.get_left_coeff_2();
+				effect.condition.deadband[2] = effect_data.get_deadband_2();
+				effect.condition.center[2] = effect_data.get_center_2();
+			case 1:
+				effect.condition.right_sat[1] = effect_data.get_right_sat_1();
+				effect.condition.left_sat[1] = effect_data.get_left_sat_1();
+				effect.condition.right_coeff[1] = effect_data.get_right_coeff_1();
+				effect.condition.left_coeff[1] = effect_data.get_left_coeff_1();
+				effect.condition.deadband[1] = effect_data.get_deadband_1();
+				effect.condition.center[1] = effect_data.get_center_1();
+			default:
+				effect.condition.right_sat[0] = effect_data.get_right_sat_0();
+				effect.condition.left_sat[0] = effect_data.get_left_sat_0();
+				effect.condition.right_coeff[0] = effect_data.get_right_coeff_0();
+				effect.condition.left_coeff[0] = effect_data.get_left_coeff_0();
+				effect.condition.deadband[0] = effect_data.get_deadband_0();
+				effect.condition.center[0] = effect_data.get_center_0();
+		}*/
 	 break;
  	case custom:
 		 cout << "Custom" << endl;

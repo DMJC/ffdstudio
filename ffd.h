@@ -44,7 +44,7 @@ private:
     Gtk::Paned pane;
     Gtk::Button test_effect_button;
     Gtk::Scale direction_0, direction_1, direction_2, delay, period, phase, offset, magnitude, large_magnitude, small_magnitude, length, fade, fade_lvl, fade_length, attack, attack_lvl;
-    Gtk::Scale level, left_sat, right_sat, right_coeff, left_coeff, deadband, center, start_strength, end_strength;
+    Gtk::Scale level, left_sat_0, right_sat_0, right_coeff_0, left_coeff_0, deadband_0, center_0, left_sat_1, right_sat_1, right_coeff_1, left_coeff_1, deadband_1, center_1,left_sat_2, right_sat_2, right_coeff_2, left_coeff_2, deadband_2, center_2, start_strength, end_strength;
     Gtk::Entry name_entry;
     Gtk::ComboBoxText effect_type, direction_type, condition_type;
     FFDEffect effect;

@@ -13,12 +13,24 @@ short unsigned int length;
 short unsigned int delay;
 short unsigned int button;
 short unsigned int interval;
-short unsigned int right_sat;
-short unsigned int left_sat;
-short signed int right_coeff;
-short signed int left_coeff;
-short unsigned int deadband;
-short signed int center;
+short unsigned int right_sat_0;
+short unsigned int right_sat_1;
+short unsigned int right_sat_2;
+short unsigned int left_sat_0;
+short unsigned int left_sat_1;
+short unsigned int left_sat_2;
+short signed int right_coeff_0;
+short signed int right_coeff_1;
+short signed int right_coeff_2;
+short signed int left_coeff_0;
+short signed int left_coeff_1;
+short signed int left_coeff_2;
+short unsigned int deadband_0;
+short unsigned int deadband_1;
+short unsigned int deadband_2;
+short signed int center_0;
+short signed int center_1;
+short signed int center_2;
 short unsigned int direction_0;
 short unsigned int direction_1;
 short unsigned int direction_type;
@@ -45,12 +57,24 @@ public:
 	void set_delay(short unsigned int delay){this->delay= delay;}
 	void set_button(short unsigned int button){this->button = button;}
 	void set_interval(short unsigned int interval){this->interval = interval;}
-	void set_right_sat(short unsigned int right_sat){this->right_sat = right_sat;}
-	void set_left_sat(short unsigned int left_sat){this->left_sat = left_sat;}
-	void set_right_coeff(short signed int right_coeff){this->right_coeff = right_coeff;}
-	void set_left_coeff(short signed int left_coeff){this->left_coeff = left_coeff;}
-	void set_deadband(short unsigned int deadband){this->deadband = deadband;}
-	void set_center(short signed int center){this->center = center;}
+	void set_right_sat_0(short unsigned int right_sat_0){this->right_sat_0 = right_sat_0;}
+	void set_right_sat_1(short unsigned int right_sat_1){this->right_sat_1 = right_sat_1;}
+	void set_right_sat_2(short unsigned int right_sat_2){this->right_sat_2 = right_sat_2;}
+	void set_left_sat_0(short unsigned int left_sat_0){this->left_sat_0 = left_sat_0;}
+	void set_left_sat_1(short unsigned int left_sat_1){this->left_sat_1 = left_sat_1;}
+	void set_left_sat_2(short unsigned int left_sat_2){this->left_sat_2 = left_sat_2;}
+	void set_right_coeff_0(short signed int right_coeff_0){this->right_coeff_0 = right_coeff_0;}
+	void set_right_coeff_1(short signed int right_coeff_1){this->right_coeff_1 = right_coeff_1;}
+	void set_right_coeff_2(short signed int right_coeff_2){this->right_coeff_2 = right_coeff_2;}
+	void set_left_coeff_0(short signed int left_coeff_0){this->left_coeff_0 = left_coeff_0;}
+	void set_left_coeff_1(short signed int left_coeff_1){this->left_coeff_1 = left_coeff_1;}
+	void set_left_coeff_2(short signed int left_coeff_2){this->left_coeff_2 = left_coeff_2;}
+	void set_deadband_0(short unsigned int deadband_0){this->deadband_0 = deadband_0;}
+	void set_deadband_1(short unsigned int deadband_1){this->deadband_1 = deadband_1;}
+	void set_deadband_2(short unsigned int deadband_2){this->deadband_2 = deadband_1;}
+	void set_center_0(short signed int center_0){this->center_0 = center_0;}
+	void set_center_1(short signed int center_1){this->center_1 = center_1;}
+	void set_center_2(short signed int center_2){this->center_2 = center_2;}
 	void set_direction_0(short unsigned int direction_0){this->direction_0 = direction_0;}
 	void set_direction_1(short unsigned int direction_1){this->direction_1 = direction_1;}
 	void set_direction_type(short unsigned int direction_type){this->direction_type = direction_type;}
@@ -74,12 +98,24 @@ public:
 	short unsigned int get_delay(void){return delay;}
 	short unsigned int get_button(void){return button;}
 	short unsigned int get_interval(void){return interval;}
-	short unsigned int get_right_sat(void){return right_sat;}
-	short unsigned int get_left_sat(void){return left_sat;}
-	short signed int get_right_coeff(void){return right_coeff;}
-	short signed int get_left_coeff(void){return left_coeff;}
-	short unsigned int get_deadband(void){return deadband;}
-	short signed int get_center(void){return center;}
+	short unsigned int get_right_sat_0(void){return right_sat_0;}
+	short unsigned int get_right_sat_1(void){return right_sat_1;}
+	short unsigned int get_right_sat_2(void){return right_sat_2;}
+	short unsigned int get_left_sat_0(void){return left_sat_0;}
+	short unsigned int get_left_sat_1(void){return left_sat_1;}
+	short unsigned int get_left_sat_2(void){return left_sat_2;}
+	short signed int get_right_coeff_0(void){return right_coeff_0;}
+	short signed int get_right_coeff_1(void){return right_coeff_1;}
+	short signed int get_right_coeff_2(void){return right_coeff_2;}
+	short signed int get_left_coeff_0(void){return left_coeff_0;}
+	short signed int get_left_coeff_1(void){return left_coeff_1;}
+	short signed int get_left_coeff_2(void){return left_coeff_2;}
+	short unsigned int get_deadband_0(void){return deadband_0;}
+	short unsigned int get_deadband_1(void){return deadband_1;}
+	short unsigned int get_deadband_2(void){return deadband_2;}
+	short signed int get_center_0(void){return center_0;}
+	short signed int get_center_1(void){return center_1;}
+	short signed int get_center_2(void){return center_2;}
 	short unsigned int get_direction_type(void){ return direction_type;}
 	short unsigned int get_direction_0(void){return direction_0;}
 	short unsigned int get_direction_1(void){return direction_1;}

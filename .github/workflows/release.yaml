@@ -61,7 +61,7 @@ jobs:
           mkdir -p debian/ffdstudio/usr/bin
           cp ffdstudio debian/ffdstudio/usr/bin/
           dpkg-deb --build debian/ffdstudio .
-          mv ffdstudio.deb ffdstudio_${{ steps.get_version.outputs.VERSION }}_amd64.deb
+          ls
           
       - name: Package RPM (rpm)
         run: |

@@ -48,16 +48,20 @@ jobs:
         run: |
           make build
           
+      - name: Get version from tag
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/v}
+
       - name: Package Debian (deb)
         run: |
           mkdir -p debian/ffdstudio/DEBIAN
           echo "Package: ffdstudio" > debian/ffdstudio/DEBIAN/control
-          echo "Version: 1.0.0" >> debian/ffdstudio/DEBIAN/control
+          echo "Version: ${{ steps.get_version.outputs.VERSION }}" >> debian/ffdstudio/DEBIAN/control
           echo "Architecture: amd64" >> debian/ffdstudio/DEBIAN/control
           mkdir -p debian/ffdstudio/usr/bin
           cp ffdstudio debian/ffdstudio/usr/bin/
           dpkg-deb --build debian/ffdstudio .
-          mv ffdstudio.deb ffdstudio.deb
+          mv ffdstudio.deb ffdstudio_${{ steps.get_version.outputs.VERSION }}_amd64.deb
           
       - name: Package RPM (rpm)
         run: |
@@ -95,8 +99,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ffdstudio.deb
-          asset_name: ffdstudio.deb
+          asset_path: ./ffdstudio_${{ steps.get_version.outputs.VERSION }}_amd64.deb
+          asset_name: ffdstudio_${{ steps.get_version.outputs.VERSION }}_amd64.deb
           asset_content_type: application/octet-stream
           
       - name: Upload rpm package

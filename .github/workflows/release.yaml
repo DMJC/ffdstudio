@@ -103,7 +103,7 @@ jobs:
           - Initial package
 
           EOF
-          tar czf rpm/ffdstudio-%{{steps.get_version.outputs.VERSION}}.tar.gz -C rpm ffdstudio
+          tar czf rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}.tar.gz -C rpm ffdstudio
           rpmbuild -bb --define "_topdir $(pwd)/rpm" --define "_builddir $(pwd)/rpm/BUILD" --define "_rpmdir $(pwd)/rpm/RPMS" --define "_sourcedir $(pwd)/rpm" --define "_specdir $(pwd)/rpm" --define "_srcrpmdir $(pwd)/rpm/SRPMS" rpm/ffdstudio.spec
           mv rpm/RPMS/x86_64/*.rpm ffdstudio.rpm
           

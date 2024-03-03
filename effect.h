@@ -6,8 +6,9 @@ using namespace std;
 class FFDEffect {
 private:
 string effect_name;
-short unsigned int effect_type;
-short unsigned int type;
+unsigned int type;
+unsigned int effect_type;
+unsigned short int condition_type;
 short unsigned int length;
 short unsigned int delay;
 short unsigned int button;
@@ -36,8 +37,9 @@ short unsigned int fade_level;
 
 public:
 	void set_effect_name(string effect_name){this->effect_name = effect_name;}
-	void set_effect_type(short unsigned int effect_type){this->effect_type = effect_type;}
-	void set_type(short unsigned int type){this->type = type;}
+	void set_type(unsigned int type){this->type = type;}
+	void set_effect_type(unsigned int effect_type){this->effect_type = effect_type;}
+	void set_condition_type(unsigned short int condition_type){this->condition_type = condition_type;}
 	void set_length(short unsigned int length){this->length = length;}
 	void set_delay(short unsigned int delay){this->delay= delay;}
 	void set_button(short unsigned int button){this->button = button;}
@@ -63,8 +65,9 @@ public:
 	void set_fade_level(short unsigned int fade_level){this->fade_level = fade_level;}
 
 	string get_effect_name(void){ return effect_name; }
-	short unsigned int get_effect_type(void){ return effect_type;}
-	short unsigned int get_type(void){ return type;}
+	unsigned int get_type(void){ return type;}
+	unsigned int get_effect_type(void){ return effect_type;}
+	unsigned short int get_condition_type(void){ return condition_type;}
 	short unsigned int get_length(void){ return length;}
 	short unsigned int get_delay(void){return delay;}
 	short unsigned int get_button(void){return button;}

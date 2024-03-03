@@ -332,7 +332,7 @@ FFDWindow::FFDWindow()
 	fade.add_mark(50000, Gtk::PositionType::TOP, "50");
 	fade.add_mark(60000, Gtk::PositionType::TOP, "60");
 	fade.add_mark(65535, Gtk::PositionType::TOP, "MAX");
-	fade.set_value(125);
+	fade.set_value(250);
 	fade.set_hexpand();
 	fade.set_vexpand();
 
@@ -469,7 +469,7 @@ void FFDWindow::update_variables()
 	this->effect.set_phase(int(phase.get_value()));
 	this->effect.set_attack_length(int(attack.get_value()));
 	this->effect.set_attack_level(int(attack_lvl.get_value()));
-	this->effect.set_fade_length(int(fade_length.get_value()));
+	this->effect.set_fade_length(int(fade.get_value()));
 	this->effect.set_fade_level(int(fade_lvl.get_value()));
 }
 
@@ -661,27 +661,25 @@ void FFDWindow::on_ramp_button_clicked()
 	effect_create_grid.attach(name_label,0,0,1,1);
 	effect_create_grid.attach(name_entry,1,0,1,1);
 	effect_create_grid.attach(effect_header_label,0,1,2,1);
-	effect_create_grid.attach(effect_type_label,0,2,1,1);
-	effect_create_grid.attach(effect_type,1,2,1,1);
-	effect_create_grid.attach(dir_type_label,0,3,1,1);
-	effect_create_grid.attach(direction_type,1,3,1,1);
-	effect_create_grid.attach(dir_label,0,4,1,1);
-	effect_create_grid.attach(direction,1,4,4,1);
-	effect_create_grid.attach(length_label,0,5,1,1);
-	effect_create_grid.attach(length,1,5,1,1);
-	effect_create_grid.attach(delay_label,0,6,1,1);
-	effect_create_grid.attach(delay,1,6,1,1);
-	effect_create_grid.attach(start_strength_label,0,7,1,1);
-	effect_create_grid.attach(start_strength,1,7,1,1);
-	effect_create_grid.attach(end_strength_label,0,8,1,1);
-	effect_create_grid.attach(end_strength,1,8,1,1);
-	effect_create_grid.attach(attack_lvl_label,0,9,1,1);
-	effect_create_grid.attach(attack_lvl,1,9,1,1);
-	effect_create_grid.attach(fade_label,0,10,1,1);
-	effect_create_grid.attach(fade,1,10,1,1);
-	effect_create_grid.attach(fade_lvl_label,0,11,1,1);
-	effect_create_grid.attach(fade_lvl,1,11,1,1);
-	effect_create_grid.attach(test_effect_button,0,12,3,1);
+	effect_create_grid.attach(dir_type_label,0,2,1,1);
+	effect_create_grid.attach(direction_type,1,2,1,1);
+	effect_create_grid.attach(dir_label,0,3,1,1);
+	effect_create_grid.attach(direction,1,3,4,1);
+	effect_create_grid.attach(length_label,0,4,1,1);
+	effect_create_grid.attach(length,1,4,1,1);
+	effect_create_grid.attach(delay_label,0,5,1,1);
+	effect_create_grid.attach(delay,1,5,1,1);
+	effect_create_grid.attach(start_strength_label,0,6,1,1);
+	effect_create_grid.attach(start_strength,1,6,1,1);
+	effect_create_grid.attach(end_strength_label,0,7,1,1);
+	effect_create_grid.attach(end_strength,1,7,1,1);
+	effect_create_grid.attach(attack_lvl_label,0,8,1,1);
+	effect_create_grid.attach(attack_lvl,1,8,1,1);
+	effect_create_grid.attach(fade_label,0,9,1,1);
+	effect_create_grid.attach(fade,1,9,1,1);
+	effect_create_grid.attach(fade_lvl_label,0,10,1,1);
+	effect_create_grid.attach(fade_lvl,1,10,1,1);
+	effect_create_grid.attach(test_effect_button,0,11,3,1);
 		align_all();
 	this->chosen == 1;
 }
@@ -741,25 +739,23 @@ void FFDWindow::on_constant_button_clicked()
 	effect_create_grid.attach(name_label,0,0,1,1);
 	effect_create_grid.attach(name_entry,1,0,1,1);
 	effect_create_grid.attach(effect_header_label,0,1,2,1);
-	effect_create_grid.attach(condition_type_label,0,2,1,1);
-	effect_create_grid.attach(condition_type,1,2,1,1);
-	effect_create_grid.attach(dir_label,0,3,1,1);
-	effect_create_grid.attach(direction,1,3,4,1);
-	effect_create_grid.attach(length_label,0,4,1,1);
-	effect_create_grid.attach(length,1,4,1,1);
-	effect_create_grid.attach(delay_label,0,5,1,1);
-	effect_create_grid.attach(delay,1,5,1,1);
-	effect_create_grid.attach(level_label,0,6,1,1);
-	effect_create_grid.attach(level,1,6,1,1);
-	effect_create_grid.attach(attack_label,0,7,1,1);
-	effect_create_grid.attach(attack,1,7,1,1);
-	effect_create_grid.attach(attack_lvl_label,0,8,1,1);
-	effect_create_grid.attach(attack_lvl,1,8,1,1);
-	effect_create_grid.attach(fade_label,0,9,1,1);
-	effect_create_grid.attach(fade,1,9,1,1);
-	effect_create_grid.attach(fade_lvl_label,0,10,1,1);
-	effect_create_grid.attach(fade_lvl,1,10,1,1);
-	effect_create_grid.attach(test_effect_button,0,11,2,1);
+	effect_create_grid.attach(dir_label,0,2,1,1);
+	effect_create_grid.attach(direction,1,2,4,1);
+	effect_create_grid.attach(length_label,0,3,1,1);
+	effect_create_grid.attach(length,1,3,1,1);
+	effect_create_grid.attach(delay_label,0,4,1,1);
+	effect_create_grid.attach(delay,1,4,1,1);
+	effect_create_grid.attach(level_label,0,5,1,1);
+	effect_create_grid.attach(level,1,5,1,1);
+	effect_create_grid.attach(attack_label,0,6,1,1);
+	effect_create_grid.attach(attack,1,6,1,1);
+	effect_create_grid.attach(attack_lvl_label,0,7,1,1);
+	effect_create_grid.attach(attack_lvl,1,7,1,1);
+	effect_create_grid.attach(fade_label,0,8,1,1);
+	effect_create_grid.attach(fade,1,8,1,1);
+	effect_create_grid.attach(fade_lvl_label,0,9,1,1);
+	effect_create_grid.attach(fade_lvl,1,9,1,1);
+	effect_create_grid.attach(test_effect_button,0,10,2,1);
 		align_all();
 	this->chosen == 1;
 }
@@ -804,38 +800,38 @@ void FFDWindow::on_test_effect_button_clicked()
 		if (name == "Ramp"){ type_var = 4; }
 		if (name == "Custom"){ type_var = 5; }
 	cout << "type_var = " << type_var << endl;
-	this->effect.set_effect_type(type_var);
+	this->effect.set_type(type_var);
 	switch (effect_type.get_active_row_number())
 	{
 		case 0:
-			this->effect.set_type(SDL_HAPTIC_LEFTRIGHT);
+			this->effect.set_effect_type(SDL_HAPTIC_LEFTRIGHT);
 		break;
 		case 1:
-		this->effect.set_type(SDL_HAPTIC_SAWTOOTHUP);
+			this->effect.set_effect_type(SDL_HAPTIC_SAWTOOTHUP);
 		break;
 		case 2:
-			this->effect.set_type(SDL_HAPTIC_SAWTOOTHDOWN);
+			this->effect.set_effect_type(SDL_HAPTIC_SAWTOOTHDOWN);
 		break;
 		case 3:
-			this->effect.set_type(SDL_HAPTIC_SINE);
+			this->effect.set_effect_type(SDL_HAPTIC_SINE);
 		break;
 		case 4:
-			this->effect.set_type(SDL_HAPTIC_TRIANGLE);
+			this->effect.set_effect_type(SDL_HAPTIC_TRIANGLE);
 		break;
 	}
 	switch (condition_type.get_active_row_number())
 	{
 		case 0:
-			this->effect.set_type(SDL_HAPTIC_SPRING);
+			this->effect.set_condition_type(SDL_HAPTIC_SPRING);
 		break;
 		case 1:
-			this->effect.set_type(SDL_HAPTIC_DAMPER);
+			this->effect.set_condition_type(SDL_HAPTIC_DAMPER);
 		break;
 		case 2:
-			this->effect.set_type(SDL_HAPTIC_INERTIA);
+			this->effect.set_condition_type(SDL_HAPTIC_INERTIA);
 		break;
 		case 3:
-			this->effect.set_type(SDL_HAPTIC_FRICTION);
+			this->effect.set_condition_type(SDL_HAPTIC_FRICTION);
 		break;
 	}
 	update_variables();

@@ -8,7 +8,7 @@
 #include "ffd.h"
 #include "effect.h"
 
-int test_haptic( SDL_Joystick * joystick, int effect_opt, FFDEffect effect_data );
+int run_force_feedback( SDL_Joystick * joystick, int effect_opt, FFDEffect effect_data );
 void open_joysticks(FFDEffect effect_data);
 //void run_ffb(Gtk::Window& window);
 //int init_ffb(FFDEffect effect_data);

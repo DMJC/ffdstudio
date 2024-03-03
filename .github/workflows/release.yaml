@@ -118,7 +118,7 @@ jobs:
           draft: false
           prerelease: false
         continue-on-error: true          
-        
+
       - name: Upload binaries
         uses: actions/upload-release-asset@v1
         env:
@@ -129,22 +129,11 @@ jobs:
           asset_name: ffdstudio
           asset_content_type: application/octet-stream
           
-      - name: Upload deb package
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ffdstudio_${{ steps.get_version.outputs.VERSION }}_amd64.deb
-          asset_name: ffdstudio_${{ steps.get_version.outputs.VERSION }}_amd64.deb
-          asset_content_type: application/octet-stream
-          
-      - name: Upload rpm package
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ffdstudio-${{ steps.get_version.outputs.VERSION }}-1.x86_64.rpm
-          asset_name: ffdstudio-${{ steps.get_version.outputs.VERSION }}-1.x86_64.rpm
-          asset_content_type: application/octet-stream
+          files: |
+            ./ffdstudio_${{ steps.get_version.outputs.VERSION }}_amd64.deb
+            ./ffdstudio-${{ steps.get_version.outputs.VERSION }}-1.x86_64.rpm
+          token: ${{ secrets.GITHUB_TOKEN }}

@@ -65,8 +65,8 @@ jobs:
           
       - name: Package RPM (rpm)
         run: |
-          mkdir -p rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}/usr/bin
-          cp ffdstudio rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}/usr/bin/
+          mkdir -p "rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}/usr/bin"
+          cp ffdstudio "rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}/usr/bin/"
           export RPM_BUILD_ROOT="$(pwd)/rpm/BUILD"
           cat << EOF > rpm/ffdstudio.spec
           Name: ffdstudio
@@ -103,7 +103,7 @@ jobs:
           - Initial package
 
           EOF
-          tar czf rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}.tar.gz -C rpm ffdstudio
+          tar czf rpm/ffdstudio-${{steps.get_version.outputs.VERSION}}.tar.gz -C rpm "ffdstudio-${{steps.get_version.outputs.VERSION}}"
           rpmbuild -bb --define "_topdir $(pwd)/rpm" --define "_builddir $RPM_BUILD_ROOT" --define "_rpmdir $(pwd)/rpm/RPMS" --define "_sourcedir $(pwd)/rpm" --define "_specdir $(pwd)/rpm" --define "_srcrpmdir $(pwd)/rpm/SRPMS" rpm/ffdstudio.spec
           mv -v rpm/RPMS/x86_64/*.rpm ffdstudio.rpm
           

@@ -1,0 +1,91 @@
+name: Release on Tag
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger on tags like v1.0.0
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++ pkg-config libgtkmm-4.0-dev libsdl2-dev
+          
+      - name: Setup C++ build environment
+        uses: actions/setup-cpp@v2
+        with:
+          cpp-version: 'latest'
+          build-type: 'make'
+          
+      - name: Build
+        run: |
+          make build
+          
+      - name: Package Debian (deb)
+        run: |
+          mkdir -p debian/ffdstudio/DEBIAN
+          echo "Package: ffdstudio" > debian/ffdstudio/DEBIAN/control
+          echo "Version: 1.0.0" >> debian/ffdstudio/DEBIAN/control
+          echo "Architecture: amd64" >> debian/ffdstudio/DEBIAN/control
+          mkdir -p debian/ffdstudio/usr/bin
+          cp ffdstudio debian/ffdstudio/usr/bin/
+          dpkg-deb --build debian/ffdstudio .
+          mv ffdstudio.deb ffdstudio.deb
+          
+      - name: Package RPM (rpm)
+        run: |
+          mkdir -p rpm/BUILD rpm/RPMS rpm/SOURCES rpm/SPECS rpm/SRPMS
+          cp ffdstudio rpm/BUILD/
+          rpmbuild -bb --define "_topdir $(pwd)/rpm" --define "_builddir $(pwd)/rpm/BUILD" --define "_rpmdir $(pwd)/rpm/RPMS" --define "_sourcedir $(pwd)/rpm/SOURCES" --define "_specdir $(pwd)/rpm/SPECS" --define "_srcrpmdir $(pwd)/rpm/SRPMS" rpm.spec
+          mv rpm/RPMS/*.rpm ffdstudio.rpm
+          
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          
+      - name: Upload binaries
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./ffdstudio
+          asset_name: ffdstudio
+          asset_content_type: application/octet-stream
+          
+      - name: Upload deb package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./ffdstudio.deb
+          asset_name: ffdstudio.deb
+          asset_content_type: application/octet-stream
+          
+      - name: Upload rpm package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./ffdstudio.rpm
+          asset_name: ffdstudio.rpm
+          asset_content_type: application/octet-stream

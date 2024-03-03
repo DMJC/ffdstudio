@@ -17,7 +17,7 @@ jobs:
       - name: Install build dependencies
         run: |
           apt-get update
-          apt-get install -y g++ pkg-config libgtkmm-4.0-dev libsdl2-dev build-essential
+          apt-get install -y g++ pkg-config libgtkmm-4.0-dev libsdl2-dev build-essential rpm
           
       - name: Cache
         uses: actions/cache@v3

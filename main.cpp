@@ -804,9 +804,9 @@ void FFDWindow::on_save_profile_button_clicked()
 }
 
 
-void FFDWindow::clean_effect_grid() 
+void FFDWindow::clean_effect_grid()
 {
-	effect_create_grid.remove_column(3);
+//	effect_create_grid.remove_column(3);
 	effect_create_grid.remove_column(2);
 	effect_create_grid.remove_column(1);
 	effect_create_grid.remove_column(0);
@@ -829,7 +829,7 @@ void FFDWindow::align_all()
 	effect_header_label.set_halign(Gtk::Align::CENTER);
 }
 
-void FFDWindow::on_periodic_button_clicked() 
+void FFDWindow::on_periodic_button_clicked()
 {
 	clean_effect_grid();
 	effect_header_label.set_text("Periodic");
@@ -841,13 +841,13 @@ void FFDWindow::on_periodic_button_clicked()
 	effect_create_grid.attach(dir_type_label,0,3,1,1);
 	effect_create_grid.attach(direction_type,1,3,1,1);
 	effect_create_grid.attach(dir_label,0,4,1,1);
-	effect_create_grid.attach(direction_0,1,4,4,1);
+	effect_create_grid.attach(direction_0,1,4,1,1);
 	effect_create_grid.attach(period_label,0,5,1,1);
-	effect_create_grid.attach(period,1,5,4,1);
+	effect_create_grid.attach(period,1,5,1,1);
 	effect_create_grid.attach(magnitude_label,0,7,1,1);
 	effect_create_grid.attach(magnitude,1,7,1,1);
 	effect_create_grid.attach(phase_label,0,6,1,1);
-	effect_create_grid.attach(phase,1,6,4,1);
+	effect_create_grid.attach(phase,1,6,1,1);
 	effect_create_grid.attach(length_label,0,8,1,1);
 	effect_create_grid.attach(length,1,8,1,1);
 	effect_create_grid.attach(attack_label,0,9,1,1);
@@ -869,7 +869,7 @@ void FFDWindow::on_ramp_button_clicked()
 	effect_create_grid.attach(dir_type_label,0,2,1,1);
 	effect_create_grid.attach(direction_type,1,2,1,1);
 	effect_create_grid.attach(dir_label,0,3,1,1);
-	effect_create_grid.attach(direction_0,1,3,4,1);
+	effect_create_grid.attach(direction_0,1,3,1,1);
 	effect_create_grid.attach(length_label,0,4,1,1);
 	effect_create_grid.attach(length,1,4,1,1);
 	effect_create_grid.attach(delay_label,0,5,1,1);
@@ -945,7 +945,7 @@ void FFDWindow::on_constant_button_clicked()
 	effect_create_grid.attach(name_entry,1,0,1,1);
 	effect_create_grid.attach(effect_header_label,0,1,2,1);
 	effect_create_grid.attach(dir_label,0,2,1,1);
-	effect_create_grid.attach(direction_0,1,2,4,1);
+	effect_create_grid.attach(direction_0,1,2,1,1);
 	effect_create_grid.attach(length_label,0,3,1,1);
 	effect_create_grid.attach(length,1,3,1,1);
 	effect_create_grid.attach(delay_label,0,4,1,1);

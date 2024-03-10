@@ -60,7 +60,7 @@ jobs:
           echo "Architecture: amd64" >> debian/ffdstudio/DEBIAN/control
           mkdir -p debian/ffdstudio/usr/bin
           cp ffdstudio debian/ffdstudio/usr/bin/
-          dpkg-deb --build debian/ffdstudio .
+          dpkg-deb --root-owner-group --build debian/ffdstudio .
           ls
           
       - name: Package RPM (rpm)

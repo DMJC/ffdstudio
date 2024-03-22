@@ -1,7 +1,7 @@
 # Force Feedback Design Studio
 A tool for creating/editing Force Feedback Effects written in C++/GTKMM-4.0
 
--Major Milestone Reached!-
+## Major Milestone Reached 
 Can be used to create/load test and share Force Feedback Effects with other users!
 
 Notes:

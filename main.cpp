@@ -569,16 +569,9 @@ FFDWindow::FFDWindow()
 	effect_create_grid.set_hexpand();
 	effect_create_grid.set_vexpand();
 	launch_grid.set_orientation(Gtk::Orientation::VERTICAL);
-
-	// Add widgets to the first grid
-	launch_grid.attach(create_new_button,0,0,1,1);
-	launch_grid.attach(open_profile_button,0,1,1,1);
-	launch_grid.attach(quit_button,0,2,1,1);
-	//disable save button on launch
+	//disable save button at launch
 	save_profile_button.set_sensitive(false);
-
 	// Add button click event handlers
-	create_new_button.signal_clicked().connect(sigc::mem_fun(*this, &FFDWindow::on_create_button_clicked));
 	open_profile_button.signal_clicked().connect(sigc::mem_fun(*this, &FFDWindow::on_open_profile_button_clicked));
 	quit_button.signal_clicked().connect(sigc::mem_fun(*this, &FFDWindow::on_quit_button_clicked));
 	save_profile_button.signal_clicked().connect(sigc::mem_fun(*this, &FFDWindow::on_save_profile_button_clicked));
@@ -589,22 +582,7 @@ FFDWindow::FFDWindow()
 	constant_button.signal_clicked().connect(sigc::mem_fun(*this, &FFDWindow::on_constant_button_clicked));
 	custom_button.signal_clicked().connect(sigc::mem_fun(*this, &FFDWindow::on_custom_button_clicked));
 	test_effect_button.signal_clicked().connect(sigc::mem_fun(*this, &FFDWindow::on_test_effect_button_clicked));
-
-	// Add widgets to the window
-	set_child(launch_grid);
-}
-
-void FFDWindow::start_sdl() 
-{
-	init_sdl();
-}
-
-void FFDWindow::on_create_button_clicked() 
-{
-	// Remove the first grid
-	unset_child();
-	launch_grid.remove(open_profile_button);
-	launch_grid.remove(quit_button);
+	// Create Add widgets to the window
 	set_child(pane);
 	open_profile_button.set_vexpand(FALSE);
 	quit_button.set_vexpand(FALSE);
@@ -621,7 +599,11 @@ void FFDWindow::on_create_button_clicked()
 	effect_select_grid.attach(quit_button,0,9,1,1);
 	pane.set_start_child(effect_select_grid);
 	pane.set_end_child(effect_create_grid);
-//	show_all_children();
+}
+
+void FFDWindow::start_sdl()
+{
+	init_sdl();
 }
 
 void FFDWindow::update_settings()

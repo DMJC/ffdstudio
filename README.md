@@ -25,4 +25,4 @@ Can be used to create/load test and share Force Feedback Effects with other user
 - Start Packaging for Distros
   
 ## Screenshots
-![FFD Studio Screenshot](../figures/ffd_screenshot1.png)
+![FFD Studio Screenshot](https://github.com/DMJC/ffdstudio/assets/732515/d5d20cd8-ad48-4451-bb0c-261be1f34289)

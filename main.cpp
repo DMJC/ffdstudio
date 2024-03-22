@@ -624,6 +624,82 @@ void FFDWindow::on_create_button_clicked()
 //	show_all_children();
 }
 
+void FFDWindow::update_settings()
+{
+	this->name_entry.set_text(this->effect.get_effect_name());
+	this->length.set_value(this->effect.get_length());
+	this->delay.set_value(this->effect.get_delay());
+	//this->effect.set_button();
+	//this->effect.set_interval();
+	this->right_sat_0.set_value(this->effect.get_right_sat_0());
+	this->right_sat_1.set_value(this->effect.get_right_sat_1());
+	this->right_sat_2.set_value(this->effect.get_right_sat_2());
+	this->left_sat_0.set_value(this->effect.get_left_sat_0());
+	this->left_sat_1.set_value(this->effect.get_left_sat_1());
+	this->left_sat_2.set_value(this->effect.get_left_sat_2());
+	this->right_coeff_0.set_value(this->effect.get_right_coeff_0());
+	this->right_coeff_1.set_value(this->effect.get_right_coeff_1());
+	this->right_coeff_2.set_value(this->effect.get_right_coeff_2());
+	this->left_coeff_0.set_value(this->effect.get_left_coeff_0());
+	this->left_coeff_1.set_value(this->effect.get_left_coeff_1());
+	this->left_coeff_2.set_value(this->effect.get_left_coeff_2());
+	this->deadband_0.set_value(this->effect.get_deadband_0());
+	this->deadband_1.set_value(this->effect.get_deadband_1());
+	this->deadband_2.set_value(this->effect.get_deadband_2());
+	this->center_0.set_value(this->effect.get_center_0());
+	this->center_1.set_value(this->effect.get_center_1());
+	this->center_2.set_value(this->effect.get_center_2());
+	this->direction_type.set_active(this->effect.get_direction_type());
+	this->direction_0.set_value(this->effect.get_direction_0());
+	this->direction_1.set_value(this->effect.get_direction_1());
+	this->period.set_value(this->effect.get_period());
+	//this->effect.get_samples();
+	this->magnitude.set_value(this->effect.get_magnitude());
+	this->large_magnitude.set_value(this->effect.get_large_magnitude());
+	this->small_magnitude.set_value(this->effect.get_small_magnitude());
+	this->offset.set_value(this->effect.get_offset());
+	this->phase.set_value(this->effect.get_phase());
+	this->attack.set_value(this->effect.get_attack_length());
+	this->attack_lvl.set_value(this->effect.get_attack_level());
+	this->fade.set_value(this->effect.get_fade_length());
+	this->fade_lvl.set_value(this->effect.get_fade_level());
+	int type_set = 0;
+	type_set = this->effect.get_type();
+	switch (type_set)
+	{
+		case 0:
+		{
+		on_condition_button_clicked();
+		break;
+		}
+		case 1:
+		{
+		on_constant_button_clicked();
+		break;
+		}
+		case 2:
+		{
+		on_leftright_button_clicked();
+		break;
+		}
+		case 3:
+		{
+		on_periodic_button_clicked();
+		break;
+		}
+		case 4:
+		{
+		on_ramp_button_clicked();
+		break;
+		}
+		case 5:
+		{
+		on_custom_button_clicked();
+		break;
+		}
+	}
+}
+
 void FFDWindow::update_variables()
 {
 	this->effect.set_effect_name(string(name_entry.get_text()));
@@ -672,10 +748,130 @@ void FFDWindow::on_file_open_response(int response_id, Gtk::FileChooserDialog* d
   {
     case Gtk::ResponseType::OK:
     {
-      cout << "Open clicked." << endl;
-      //Notice that this is a string, not a Glib::ustring.
-
-      break;
+	cout << "Open clicked." << endl;
+        auto filename = dialog->get_file()->get_path();
+	cout << "Opening for reading: " << filename << endl;
+	ifstream infile(filename);
+                if (!infile.is_open()) {
+                std::cerr << "Error opening file for reading!" << std::endl;
+        }
+	string ffb_effect_name;
+	int ffb_type = 0;
+	int ffb_length = 0;
+	int ffb_delay = 0;
+	int ffb_right_sat_0 = 0;
+	int ffb_right_sat_1 = 0;
+	int ffb_right_sat_2 = 0;
+	int ffb_left_sat_0 = 0;
+	int ffb_left_sat_1 = 0;
+	int ffb_left_sat_2 = 0;
+	int ffb_right_coeff_0 = 0;
+	int ffb_right_coeff_1 = 0;
+	int ffb_right_coeff_2 = 0;
+	int ffb_left_coeff_0 = 0;
+	int ffb_left_coeff_1 = 0;
+	int ffb_left_coeff_2 = 0;
+	int ffb_deadband_0 = 0;
+	int ffb_deadband_1 = 0;
+	int ffb_deadband_2 = 0;
+	int ffb_center_0 = 0;
+	int ffb_center_1 = 0;
+	int ffb_center_2 = 0;
+	int ffb_direction_type = 0;
+	int ffb_direction_0 = 0;
+	int ffb_direction_1 = 0;
+	int ffb_period = 0;
+        int ffb_samples = 0;
+	int ffb_magnitude = 0;
+	int ffb_large_magnitude = 0;
+	int ffb_small_magnitude = 0;
+	int ffb_offset = 0;
+	int ffb_phase = 0;
+	int ffb_attack_length = 0;
+	int ffb_attack_level = 0;
+	int ffb_fade_length = 0;
+	int ffb_fade_level = 0;
+        getline(infile, ffb_effect_name);
+        infile >> ffb_type;
+        infile >> ffb_length;
+        infile >> ffb_delay;
+        infile >> ffb_right_sat_0;
+        infile >> ffb_right_sat_1;
+        //infile >> ffb_button(;
+	//infile >> this->effect.set_button(ffb_button);
+        //int ffb_button = 0;
+	//int ffb_interval = 0;
+	//infile >>ffb_interval;
+        //getline(infile, this->effect.set_interval(ffb_interval);
+        infile >> ffb_right_sat_2;
+        infile >> ffb_left_sat_0;
+        infile >> ffb_left_sat_1;
+        infile >> ffb_left_sat_2;
+        infile >> ffb_right_coeff_0;
+        infile >> ffb_right_coeff_1;
+        infile >> ffb_right_coeff_2;
+        infile >> ffb_large_magnitude;
+        infile >> ffb_left_coeff_0;
+        infile >> ffb_left_coeff_1;
+        infile >> ffb_left_coeff_2;
+        infile >> ffb_deadband_0;
+        infile >> ffb_deadband_1;
+        infile >> ffb_deadband_2;
+        infile >> ffb_center_0;
+        infile >> ffb_center_1;
+        infile >> ffb_center_2;
+        infile >> ffb_direction_type;
+        infile >> ffb_direction_0;
+        infile >> ffb_direction_1;
+        infile >> ffb_period;
+        infile >> ffb_magnitude;
+        infile >> ffb_small_magnitude;
+        infile >> ffb_offset;
+        infile >> ffb_phase;
+        infile >> ffb_attack_length;
+        infile >> ffb_attack_level;
+        infile >> ffb_fade_length;
+        infile >> ffb_fade_level;
+        this->effect.set_effect_name(ffb_effect_name);
+        this->effect.set_type(ffb_type);
+        this->effect.set_length(ffb_length);
+        this->effect.set_delay(ffb_delay);
+        this->effect.set_right_sat_0(ffb_right_sat_0);
+        this->effect.set_right_sat_1(ffb_right_sat_1);
+        this->effect.set_right_sat_2(ffb_right_sat_2);
+        this->effect.set_left_sat_0(ffb_left_sat_0);
+        this->effect.set_left_sat_1(ffb_left_sat_1);
+        this->effect.set_left_sat_2(ffb_left_sat_2);
+        this->effect.set_right_coeff_0(ffb_right_coeff_0);
+        this->effect.set_right_coeff_1(ffb_right_coeff_1);
+        this->effect.set_right_coeff_2(ffb_right_coeff_2);
+        this->effect.set_left_coeff_0(ffb_left_coeff_0);
+        this->effect.set_left_coeff_1(ffb_left_coeff_1);
+	this->effect.set_left_coeff_2(ffb_left_coeff_2);
+        this->effect.set_deadband_0(ffb_deadband_0);
+        this->effect.set_deadband_1(ffb_deadband_1);
+        this->effect.set_deadband_2(ffb_deadband_2);
+        this->effect.set_center_0(ffb_center_0);
+        this->effect.set_center_1(ffb_center_1);
+        this->effect.set_center_2(ffb_center_2);
+        this->effect.set_direction_type(ffb_direction_type);
+        this->effect.set_direction_0(ffb_direction_0);
+        this->effect.set_direction_1(ffb_direction_1);
+        this->effect.set_period(ffb_period);
+        //getline(infile,ffb_samples;
+        //getline(infile, this->effect.set_samples(ffb_samples;
+        this->effect.set_magnitude(ffb_magnitude);
+        this->effect.set_large_magnitude(ffb_large_magnitude);
+        this->effect.set_small_magnitude(ffb_small_magnitude);
+        this->effect.set_offset(ffb_offset);
+        this->effect.set_phase(ffb_phase);
+        this->effect.set_attack_length(ffb_attack_length);
+        this->effect.set_attack_level(ffb_attack_level);
+        this->effect.set_fade_length(ffb_fade_length);
+        this->effect.set_fade_level(ffb_fade_level);
+	infile.close();
+	update_settings();
+        break;
     }
     case Gtk::ResponseType::CANCEL:
     {
@@ -693,8 +889,8 @@ void FFDWindow::on_file_open_response(int response_id, Gtk::FileChooserDialog* d
 
 void FFDWindow::on_open_profile_button_clicked() 
 {
-    auto open_dialog = new Gtk::FileChooserDialog("Please choose a file", Gtk::FileChooser::Action::OPEN);
-    open_dialog->set_transient_for(*this);
+	auto open_dialog = new Gtk::FileChooserDialog("Please choose a file", Gtk::FileChooser::Action::OPEN);
+	open_dialog->set_transient_for(*this);
 	open_dialog->set_select_multiple(false);
 	open_dialog->add_button("_Cancel", Gtk::ResponseType::CANCEL);
 	open_dialog->add_button("_Open", Gtk::ResponseType::OK);
@@ -702,7 +898,7 @@ void FFDWindow::on_open_profile_button_clicked()
 	filter_ffp->set_name("FFP Files");
 	filter_ffp->add_pattern("*.ffp");
 	open_dialog->add_filter(filter_ffp);
-    open_dialog->signal_response().connect(sigc::bind(sigc::mem_fun(*this, &FFDWindow::on_file_open_response), open_dialog));
+    	open_dialog->signal_response().connect(sigc::bind(sigc::mem_fun(*this, &FFDWindow::on_file_open_response), open_dialog));
 	open_dialog->show();
 
 /*		int result = open_dialog.run();
@@ -733,45 +929,47 @@ void FFDWindow::on_file_save_response(int response_id, Gtk::FileChooserDialog* d
 		if (!outfile.is_open()) {
         	std::cerr << "Error opening file for writing!" << std::endl;
     	}
-		update_variables();
-		outfile << this->effect.get_effect_name() << endl;
-		outfile << this->effect.get_length() << endl;
-		outfile << this->effect.get_delay() << endl;
-		//outfile << this->effect.get_button();
-		//outfile << this->effect.get_interval();
-		outfile << this->effect.get_right_sat_0() << endl;
-		outfile << this->effect.get_right_sat_1() << endl;
-		outfile << this->effect.get_right_sat_2() << endl;
-		outfile << this->effect.get_left_sat_0() << endl;
-		outfile << this->effect.get_left_sat_1() << endl;
-		outfile << this->effect.get_left_sat_2() << endl;
-		outfile << this->effect.get_right_coeff_0() << endl;
-		outfile << this->effect.get_right_coeff_1() << endl;
-		outfile << this->effect.get_right_coeff_2() << endl;
-		outfile << this->effect.get_left_coeff_0() << endl;
-		outfile << this->effect.get_left_coeff_1() << endl;
-		outfile << this->effect.get_left_coeff_2() << endl;
-		outfile << this->effect.get_deadband_0() << endl;
-		outfile << this->effect.get_deadband_1() << endl;
-		outfile << this->effect.get_deadband_2() << endl;
-		outfile << this->effect.get_center_0() << endl;
-		outfile << this->effect.get_center_1() << endl;
-		outfile << this->effect.get_center_2() << endl;
-		outfile << this->effect.get_direction_type() << endl;
-		outfile << this->effect.get_direction_0() << endl;
-		outfile << this->effect.get_direction_1() << endl;
-		outfile << this->effect.get_period() << endl;
-		//outfile << this->effect.get_samples();
-		outfile << this->effect.get_magnitude() << endl;
-		outfile << this->effect.get_large_magnitude() << endl;
-		outfile << this->effect.get_small_magnitude() << endl;
-		outfile << this->effect.get_offset() << endl;
-		outfile << this->effect.get_phase() << endl;
-		outfile << this->effect.get_attack_length() << endl;
-		outfile << this->effect.get_attack_level() << endl;
-		outfile << this->effect.get_fade_length() << endl;
-		outfile << this->effect.get_fade_level() << endl;
-		outfile.close();
+	update_variables();
+	outfile << this->effect.get_effect_name() << endl;
+	cout << "Effect Type: " << this->effect.get_type() << endl;
+	outfile << this->effect.get_type() << endl;
+	outfile << this->effect.get_length() << endl;
+	outfile << this->effect.get_delay() << endl;
+	//outfile << this->effect.get_button();
+	//outfile << this->effect.get_interval();
+	outfile << this->effect.get_right_sat_0() << endl;
+	outfile << this->effect.get_right_sat_1() << endl;
+	outfile << this->effect.get_right_sat_2() << endl;
+	outfile << this->effect.get_left_sat_0() << endl;
+	outfile << this->effect.get_left_sat_1() << endl;
+	outfile << this->effect.get_left_sat_2() << endl;
+	outfile << this->effect.get_right_coeff_0() << endl;
+	outfile << this->effect.get_right_coeff_1() << endl;
+	outfile << this->effect.get_right_coeff_2() << endl;
+	outfile << this->effect.get_left_coeff_0() << endl;
+	outfile << this->effect.get_left_coeff_1() << endl;
+	outfile << this->effect.get_left_coeff_2() << endl;
+	outfile << this->effect.get_deadband_0() << endl;
+	outfile << this->effect.get_deadband_1() << endl;
+	outfile << this->effect.get_deadband_2() << endl;
+	outfile << this->effect.get_center_0() << endl;
+	outfile << this->effect.get_center_1() << endl;
+	outfile << this->effect.get_center_2() << endl;
+	outfile << this->effect.get_direction_type() << endl;
+	outfile << this->effect.get_direction_0() << endl;
+	outfile << this->effect.get_direction_1() << endl;
+	outfile << this->effect.get_period() << endl;
+	//outfile << this->effect.get_samples();
+	outfile << this->effect.get_magnitude() << endl;
+	outfile << this->effect.get_large_magnitude() << endl;
+	outfile << this->effect.get_small_magnitude() << endl;
+	outfile << this->effect.get_offset() << endl;
+	outfile << this->effect.get_phase() << endl;
+	outfile << this->effect.get_attack_length() << endl;
+	outfile << this->effect.get_attack_level() << endl;
+	outfile << this->effect.get_fade_length() << endl;
+	outfile << this->effect.get_fade_level() << endl;
+	outfile.close();
       break;
     }
     case Gtk::ResponseType::CANCEL:
@@ -799,7 +997,7 @@ void FFDWindow::on_save_profile_button_clicked()
 	filter_ffp->set_name("FFP Files");
 	filter_ffp->add_pattern("*.ffp");
 	save_dialog->add_filter(filter_ffp);
-    save_dialog->signal_response().connect(sigc::bind(sigc::mem_fun(*this, &FFDWindow::on_file_save_response), save_dialog));
+    	save_dialog->signal_response().connect(sigc::bind(sigc::mem_fun(*this, &FFDWindow::on_file_save_response), save_dialog));
 	save_dialog->show();
 }
 
@@ -832,6 +1030,7 @@ void FFDWindow::align_all()
 void FFDWindow::on_periodic_button_clicked()
 {
 	clean_effect_grid();
+	this->effect.set_type(3);
 	effect_header_label.set_text("Periodic");
 	effect_create_grid.attach(name_label,0,0,1,1);
 	effect_create_grid.attach(name_entry,1,0,1,1);
@@ -862,6 +1061,7 @@ void FFDWindow::on_periodic_button_clicked()
 void FFDWindow::on_ramp_button_clicked() 
 {
 	clean_effect_grid();
+	this->effect.set_type(4);
 	effect_header_label.set_text("Ramp");
 	effect_create_grid.attach(name_label,0,0,1,1);
 	effect_create_grid.attach(name_entry,1,0,1,1);
@@ -889,9 +1089,10 @@ void FFDWindow::on_ramp_button_clicked()
 	this->chosen == 1;
 }
 
-void FFDWindow::on_leftright_button_clicked() 
+void FFDWindow::on_leftright_button_clicked()
 {
 	clean_effect_grid();
+	this->effect.set_type(2);
 	effect_header_label.set_text("Left Right");
 	effect_create_grid.attach(name_label,0,0,1,1);
 	effect_create_grid.attach(name_entry,1,0,1,1);
@@ -907,9 +1108,10 @@ void FFDWindow::on_leftright_button_clicked()
 	this->chosen == 1;
 }
 
-void FFDWindow::on_condition_button_clicked() 
+void FFDWindow::on_condition_button_clicked()
 {
 	clean_effect_grid();
+	this->effect.set_type(0);
 	effect_header_label.set_text("Condition");
 	effect_create_grid.attach(name_label,0,0,1,1);
 	effect_create_grid.attach(name_entry,1,0,1,1);
@@ -937,9 +1139,10 @@ void FFDWindow::on_condition_button_clicked()
 	this->chosen == 1;
 }
 
-void FFDWindow::on_constant_button_clicked() 
+void FFDWindow::on_constant_button_clicked()
 {
 	clean_effect_grid();
+	this->effect.set_type(1);
 	effect_header_label.set_text("Constant");
 	effect_create_grid.attach(name_label,0,0,1,1);
 	effect_create_grid.attach(name_entry,1,0,1,1);
@@ -968,6 +1171,7 @@ void FFDWindow::on_constant_button_clicked()
 void FFDWindow::on_custom_button_clicked() 
 {
 	clean_effect_grid();
+	this->effect.set_type(5);
 	effect_header_label.set_text("Custom");
 	effect_create_grid.attach(name_label,0,0,1,1);
 	effect_create_grid.attach(name_entry,1,0,1,1);

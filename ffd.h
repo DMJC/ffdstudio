@@ -20,6 +20,7 @@ public:
     void start_sdl();
     void on_file_save_response(int response_id, Gtk::FileChooserDialog* dialog);
     void on_file_open_response(int response_id, Gtk::FileChooserDialog* dialog);
+    void update_settings();
     void update_variables();
     void on_create_button_clicked();
     void on_open_profile_button_clicked();

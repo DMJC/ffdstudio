@@ -24,3 +24,5 @@ Can be used to create/load test and share Force Feedback Effects with other user
 - Implement some decent effects/sane values for each effect type.
 - Start Packaging for Distros
   
+## Screenshots
+![FFD Studio Screenshot](../figures/ffd_screenshot1.png)

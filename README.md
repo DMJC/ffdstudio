@@ -1,9 +1,13 @@
 # Force Feedback Design Studio
-A tool for creating/editing Force Feedback Effects written in C++/GTKMM-3.0
+A tool for creating/editing Force Feedback Effects written in C++/GTKMM-4.0
+
+--Major Milestone Reached!--
+Can be used to create/load test and share Force Feedback Effects with other users!
 
 Notes:
 - Compatible with Wayland
 - Currently Periodic effects work the best, smaller values are more effective. The default when creating a periodic effect works.
+- Able to load and save files with .ffb extension. 
 
 Testing:
 - Tested on Micosoft Sidewinder Force Feedback 2.
